@@ -15,26 +15,13 @@ function getThumb ($address) {
 
 	curl_close($ch);
 	 
-	//Clean string to remove XML parsing errors  
-	$config = array(
-		'indent' => true,
-		'clean' => true,
-		'input-xml'  => true,
-		'output-xml' => true,
-		'wrap'       => false
-    );
-
-	$tidy = new Tidy();
-	$xml = $tidy->repairString($feed, $config);
-
 	//Parse xml 
 	$thumb = "";
 	
-	$rss = simplexml_load_string($xml);
-
-	//Get value for feed thumb 
+	$rss = simplexml_load_string($feed);
 	$thumb = $rss->channel->image->url;
 	
+	//If no thumb found, use RSS.png placeholder
 	if ($thumb == "") {
 		$thumb = "images/rss.png";
 	}
