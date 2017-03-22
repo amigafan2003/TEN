@@ -84,10 +84,13 @@
 									<a href="admin.php>">
 										<?php echo $_SESSION['u_username'];?>
 									</a> <br/><br/>
+								</p>
+								<p>Go to <a href="mysubscriptions.php?userid=<?php echo $_SESSION[user_id] ?>">My Subscriptions</a><br/><br/></p>
+								<p>
 									<a href="logout.php">Logout</a>
 								</p>
 
-								<?php 
+																<?php 
 						} else { 
 					?>
 
