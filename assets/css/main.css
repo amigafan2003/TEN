@@ -69,17 +69,19 @@ div.col p{
 
 /* CONTACT ------------------------------------------------------------*/
 
+div.contact {
+	width: 100%;
+}
+
 div.contact-left{
 	width: 450px;
 	float: left;
 }
 
-
 div.contact-right{
 	width: 450px;
 	float: right;
 }
-
 
 div.contact-right p{
 	font-size: 14px;
@@ -647,6 +649,16 @@ div.taped-image img{
 
 	@media screen and (max-width: 1280px) {
 
+		div.contact-left{
+			width: 100%;
+			float: left;
+		}
+
+		div.contact-right{
+			width: 100%;
+			float: right;
+		}
+		
 		.row > * {
 			padding: 0 0 0 1.5em;
 		}
@@ -1292,6 +1304,9 @@ div.taped-image img{
 
 	@media screen and (max-width: 480px) {
 
+		.map {
+			width: 100%;
+		}
 		.row > * {
 			padding: 0 0 0 1.5em;
 		}
