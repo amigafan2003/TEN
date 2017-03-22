@@ -2,6 +2,34 @@
 header('Access-Control-Allow-Origin: *');
 include("dbconnect.inc.php");
 
+//Function to get Feed image url  - RS 21/03/2017
+function getThumb ($address) {
+	
+	//Get external RSS feed and input into string 
+	$ch = curl_init();  
+
+	curl_setopt($ch,CURLOPT_URL,$address);
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+
+	$feed = curl_exec($ch);
+
+	curl_close($ch);
+	 
+	//Parse xml 
+	$thumb = "";
+	
+	$rss = simplexml_load_string($feed);
+	$thumb = $rss->channel->image->url;
+	
+	//If no thumb found, use RSS.png placeholder
+	if ($thumb == "") {
+		$thumb = "images/rss.png";
+	}
+	
+	//Return thumb 
+	return $thumb;
+}
+
 $action = $_GET['action'];
 
 $callback = $_GET['callback'];
@@ -43,6 +71,9 @@ if($action=='select') {
 			$response .= "<div class='subrow'>";
 
 			//generate link and title for RSS Feed
+		
+			//Call function to extract feed thumb from RSS feed - RS 21/03/2017
+		    $response .= "<div style='float:right; width:200px;>'><img style='margin-left:auto; margin-right:auto; display:block;' src='" . getThumb($rssRow['address']) . "'></div>";
 			$response .= "<h2 style='display:inline'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></h2>";
 
 
