@@ -118,7 +118,7 @@
 									<!-- ENDS form -->
 								</div>
 
-								<div style="margin-left: 60px;" class="contact-left">
+								<div style="margin-left: 60px;" class="contact-right">
 									<h5 class="custom">New Customers</h4>
             				<form action="register.php"><br /><p>If you're a new customer, please register with us which will enhance your shopping experience. The registration only takes a few minutes.<br />
             				</p>

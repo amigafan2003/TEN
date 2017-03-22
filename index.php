@@ -123,47 +123,44 @@
 						<h2>Contact</h2>
 					</header>
 					<!-- left-content -->
-					<div class="contact-left">
-						<h5 class="custom">Use the form below to send us your comments</h5>
-						<!-- form -->
-						<form id="formMail" action="#" method="post">
-							<fieldset>
-								<p>
-									<label>NAME:</label>
-									<input name="name"  id="name" type="text" />
-								</p>
-								<p>
-									<label>EMAIL:</label>
-									<input name="email"  id="email" type="text" />
-								</p>
-								<p>
-									<label>WEB:</label>
-									<input name="web"  id="web" type="text" />
-								</p>
-								<p>
-									<label>COMMENTS:</label>
-									<textarea  name="comments"  id="comments" rows="5" cols="20" ></textarea>
-								</p>
+					<div class="contact">
+						<div class="contact-left">
+							<h5 class="custom">Use the form below to send us your comments</h5>
+							<!-- form -->
+							<form id="formMail" action="#" method="post">
+								<fieldset>
+									<p>
+										<label>NAME:</label>
+										<input name="name"  id="name" type="text" />
+									</p>
+									<p>
+										<label>EMAIL:</label>
+										<input name="email"  id="email" type="text" />
+									</p>
+									<p>
+										<label>WEB:</label>
+										<input name="web"  id="web" type="text" />
+									</p>
+									<p>
+										<label>COMMENTS:</label>
+										<textarea  name="comments"  id="comments" rows="5" cols="20" ></textarea>
+									</p>
 
-								<p><input type="button" value="Send" name="send" id="send" /></p>
-							</fieldset>
-						</form>
-						<!-- ENDS form -->
+									<p><input type="button" value="Send" name="send" id="send" /></p>
+								</fieldset>
+							</form>
+							<!-- ENDS form -->
 						</div>
-					<!-- ENDS left-content -->
+						<!-- ENDS left-content -->
 
-
-
-
-
-
-					<!-- right-content -->
-					<div class="contact-right">
-						<h4 class="custom">Location map</h4>
-						<div><span></span><em></em><img src="images/map.png" alt="map"/></div>
-						<p>Phone: 01253 352352<br/>
-						 <br/>
-						 Bispham Campus, Ashfield Rd, Blackpool FY2 0HB</p>
+						<!-- right-content -->
+						<div class="contact-right">
+							<h4 class="custom">Location map</h4>
+							<div><span></span><em></em><img class="map" src="images/map.png" alt="map"/></div>
+							<p>Phone: 01253 352352<br/>
+							 <br/>
+							 Bispham Campus, Ashfield Rd, Blackpool FY2 0HB</p>
+						</div>
 					</div>
 				</section>
 
