@@ -39,22 +39,30 @@
 
 				if ( $( this ).prop( "tagName" ) == "item" ) {
 
+					var url = $( this ).find( "media\\:thumbnail, thumbnail" ).attr("url" );
+					
 					htmlString = "<div class='rssitem'>";
+					if ( (url) == undefined) {
+					} else {
+						var thumb = "<div width:100%;'><div style='display:inline-block;width:20%'><img width='95%' src='" + (url) + "'></div>"; 
+					}
+					
 					$( this ).children().each( function () {
 
 
 						if ( $( this ).prop( "tagName" ) == "title" ) {
-							htmlString += "<h2>" + $( this ).text() + "</h2>";
+							htmlString += thumb  + "<div style='display:inline-block;'><h2>" + $( this ).text() + "</h2></div></div>";
 						}
 						if ( $( this ).prop( "tagName" ) == "description" ) {
-							htmlString += "<p style='display:inline; margin-left:25px;'>" + $( this ).text() + "</p>";
+							htmlString += "<span style='margin-left:25px;'>" + $( this ).text() + "</span><br />";
 						}
 						if ( $( this ).prop( "tagName" ) == "link" ) {
-							htmlString += "<br /><a style='margin-left:25px;' href='" + $( this ).text() + "'>Read more</a>";
+							htmlString += "<a target='_blank' style='margin-left:25px;' href='" + $( this ).text() + "'>Read more</a>";
 						}
 					} );
 
-					htmlString += "</div><br />";
+
+					htmlString += "</div><br /><br />";
 
 					$( "main" ).append( htmlString );
 				}
