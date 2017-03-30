@@ -1,4 +1,4 @@
-<?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' ); $pageTitle = "|  Feeds";?>
+<?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' ); $pageTitle = "|  Feeds"; $user_id = $_SESSION["user_id"]; ?>
 <!DOCTYPE HTML>
 
 <html>
@@ -17,7 +17,7 @@
 		var userid = 0;
 
 		$( document ).ready( function () {
-			userid = getUrlParameter( "userid" );
+			userid = <?php echo $user_id; ?>;
 
 			selectSubscriptions();
 
@@ -78,7 +78,7 @@
 			} );
 
 			$( document ).on( "click", '.rsslink', function ( event ) {
-				location.href = "comments.php?userid=" + userid + "&rssid=" + $( this ).attr( "rssid" );
+				location.href = "comments.php?rssid=" + $( this ).attr( "rssid" );
 				return false;
 			} );
 
@@ -142,12 +142,22 @@
 				<!-- Banner -->
 				<section id="banner">
 					<div id="main">
-						<div id="messages">
+						<?php
+							if (isset($_SESSION["user_id"])) {
+								?>
+								<div id="messages">
 
-						</div>
-						<div id="subcontent">
+								</div>
+								<div id="subcontent">
 
-						</div>
+								</div>
+								<?php
+							} else {
+								?>
+								<p>Please <a href="login.php">login</a> to view this page.</p>
+								<?php
+							}
+						?>
 					</div>
 				</section>
 
