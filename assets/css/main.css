@@ -2246,6 +2246,7 @@ div.taped-image img{
 
 		a:hover {
 			border-bottom-color: #62d4e5;
+			text-decoration:none;
 			color: #62d4e5 !important;
 		}
 
