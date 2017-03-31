@@ -71,11 +71,11 @@ $address = mysqli_query($dbconnect,
 				                  <?php
 				                  	require 'database.php';
 				                   $pdo = Database::connect();
-				                   $sql = 'SELECT * FROM customers  ORDER BY id DESC';
+				                   $sql = 'SELECT * FROM feeds ORDER BY id DESC';
 				                   foreach ($pdo->query($sql) as $row) {
 				                            echo '<tr>';
-				                            echo '<td>'. $row['name'] . '</td>';
-				                            echo '<td>'. $row['email'] . '</td>';
+				                            echo '<td>'. $row['title'] . '</td>';
+				                            echo '<td>'. $row['address'] . '</td>';
 				                            echo '<td>'. $row['mobile'] . '</td>';
 				                            echo '<td width=250>';
 				                            echo '<a class="btn" href="read.php?id='.$row['id'].'">Read</a>';
