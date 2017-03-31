@@ -31,9 +31,6 @@
         if (empty($email)) {
             $emailError = 'Please enter Email Address';
             $valid = false;
-        } else if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
-            $emailError = 'Please enter a valid Feed URL';
-            $valid = false;
         }
          
         if (empty($mobile)) {
@@ -45,7 +42,7 @@
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE feeds  set name = ?, email = ?, mobile =? WHERE id = ?";
+            $sql = "UPDATE customers  set name = ?, email = ?, mobile =? WHERE id = ?";
             $q = $pdo->prepare($sql);
             $q->execute(array($name,$email,$mobile,$id));
             Database::disconnect();
@@ -54,12 +51,12 @@
     } else {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT * FROM feeds where id = ?";
+        $sql = "SELECT * FROM customers where id = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         $data = $q->fetch(PDO::FETCH_ASSOC);
-        $name = $data['title'];
-        $email = $data['address'];
+        $name = $data['name'];
+        $email = $data['email'];
         $mobile = $data['mobile'];
         Database::disconnect();
     }
@@ -118,7 +115,9 @@
                       &nbsp;
                       &nbsp;
                       <div class="form-actions">
-                          <button type="submit" class="btn btn-success"><a style="color:white;" href="admin_feeds.php">Update</a></button>
+                          <button type="submit" class="btn btn-success"><a style="color:white;">
+                            <a style="color:white; text-decoration:none;" href="admin_feeds.php">Update</a>
+                          </button>
                           <a class="btn" href="admin_feeds.php">Back</a>
                         </div>
                     </form>

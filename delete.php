@@ -17,7 +17,7 @@
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         Database::disconnect();
-        header("Location: index.php");
+        header("Location: admin_feeds.php");
          
     }
 ?>
@@ -44,7 +44,7 @@
      
                 <div class="span10 offset1">
                     <div class="row">
-                        <h3>Delete a Customer</h3>
+                        <h3>Delete a RSS Feed</h3>
                     </div>
                      
                     <form class="form-horizontal" action="delete.php" method="post">

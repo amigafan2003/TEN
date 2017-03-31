@@ -9,19 +9,19 @@
         $mobileError = null;
          
         // keep track post values
-        $title = $_POST['name'];
+        $name = $_POST['name'];
         $email = $_POST['email'];
         $mobile = $_POST['mobile'];
          
         // validate input
         $valid = true;
-        if (empty($title)) {
+        if (empty($name)) {
             $nameError = 'Please enter Name';
             $valid = false;
         }
          
-        if (empty($address)) {
-            $emailError = 'Please enter RSS Feed URL';
+        if (empty($email)) {
+            $emailError = 'Please enter Email Address';
             $valid = false;
         }
 
