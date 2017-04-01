@@ -56,7 +56,7 @@ if($action=='select') {
 								FROM `RSS`
 								INNER JOIN `SUBSCRIPTION`
 								ON `SUBSCRIPTION`.`rss_id` = `RSS`.`rss_id`
-								WHERE `SUBSCRIPTION`.`user_id`={$userId}");
+								WHERE `SUBSCRIPTION`.`user_id`={$userId} AND `RSS`.`active`='1'");
 	
 	$rowsRet = mysqli_num_rows($rssResult);
 	if ($rowsRet == 0) {

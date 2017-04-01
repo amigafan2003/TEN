@@ -1,15 +1,15 @@
 <?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' );
 $pageTitle = "|  Manage RSS Feeds";
 
-$title = mysqli_query($dbconnect,
-		"SELECT `title` 
+$title = mysqli_query( $dbconnect,
+	"SELECT `title` 
 		 FROM `rss`"
-	);
+);
 
-$address = mysqli_query($dbconnect,
-		"SELECT `address` 
+$address = mysqli_query( $dbconnect,
+	"SELECT `address` 
 		 FROM `rss`"
-	);
+);
 ?>
 <!DOCTYPE HTML>
 
@@ -25,13 +25,18 @@ $address = mysqli_query($dbconnect,
 	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script>
+		function confirmChoice( rssId ) {
+			response = confirm( "Are you sure you want to delete this RSS Feed?" );
+			if ( response == 1 ) {
+				window.location = "mng_content.php?action=delete&id=" + rssId;
+			} else {
+				return false
+			}
+		}
+	</script>
 
 </head>
 
@@ -51,50 +56,71 @@ $address = mysqli_query($dbconnect,
 				<!-- Banner -->
 				<section id="banner">
 					<div id="main">
-						<p class="section-title">
-							  <div class="row">
-				                <h3></h3>
-				            		</div>
+							<?php
+							if ( isset( $_SESSION[ "u_level" ] ) ) {
+								if ( $_SESSION[ "u_level" ] == "admin" ) {
+									?>
+							<div class="row">
 
-				           			<div class="row">
+								<table style="overflow-x:auto;" class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>Feed Name</th>
+											<th>Feed URL</th>
+											<th>Category</th>
+											<th>Feed active</th>
+											<th>Options</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
 
-				                <table class="table table-striped table-bordered">
-				                  <thead>
-				                    <tr>
-				                      <th>Feed Name</th>
-				                      <th>Feed URL</th>
-				                      <th>Category</th>
-				                      <th>Options</th>
-				                    </tr>
-				                  </thead>
-				                  <tbody>
-				                  <?php
-				                  	require 'database.php';
-				                   $pdo = Database::connect();
-				                   $sql = 'SELECT * FROM customers ORDER BY id DESC';
-				                   foreach ($pdo->query($sql) as $row) {
-				                            echo '<tr>';
-				                            echo '<td>'. $row['name'] . '</td>';
-				                            echo '<td>'. $row['email'] . '</td>';
-				                            echo '<td>'. $row['mobile'] . '</td>';
-				                            echo '<td width=250>';
-				                            echo '<a class="btn" href="read.php?id='.$row['id'].'">Read</a>';
-				                            echo ' ';
-				                            echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Update</a>';
-				                            echo ' ';
-				                            echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Delete</a>';
-				                            echo '</td>';
-				                            echo '</tr>';
-				                   }
-				                   Database::disconnect();
-				                  ?>
-				                  </tbody>
-				            </table>
-				            <p style="style="background-color:"#337ab7;">
-				              <a href="create.php" class="btn btn-success">Create</a>
-				            </p>
-				        </div>
-						</p>
+										$rssResult = mysqli_query( $dbconnect,
+											"SELECT *
+													FROM `RSS` order by title asc" );
+										while ( $rssRow = mysqli_fetch_array( $rssResult ) ) {
+											echo '<tr>';
+											echo '<td>' . $rssRow[ 'title' ] . '</td>';
+											echo '<td>' . $rssRow[ 'address' ] . '</td>';
+											echo '<td>' . $rssRow[ 'category' ] . '</td>';
+											if ($rssRow[ 'active' ] == 1) {
+												echo '<td>Active</td>';														
+											} else {
+												echo '<td>Not active</td>';												
+											}
+											echo '<td style="min-width:240px">';
+											echo '<a style="display:inline-block;" class="btn" href="comments.php?rssid=' . $rssRow[ 'rss_id' ] . '">Read</a>';
+											echo ' ';
+											echo '<a style="display:inline-block;" class="btn btn-success" href="update.php?id=' . $rssRow[ 'rss_id' ] . '">Update</a>';
+											echo ' ';
+											echo '<a style="display:inline-block;" class="btn btn-danger" href="javascript:confirmChoice(' . $rssRow[ 'rss_id' ] . ')">Delete</a>';
+											echo '</td>';
+											echo '</tr>';
+										}
+
+										?>
+									</tbody>
+								</table>
+								<p style="style=" background-color: "#337ab7;">
+									<a href="create.php" class="btn btn-success">Create</a>
+								</p>
+							</div>
+							<?php
+								if ( $_SESSION[ 'message' ] != "" ) {
+									echo $_SESSION[ 'message' ];
+									$_SESSION[ 'message' ] = "";
+								}
+							?>
+							<?php
+							} else {
+								?> You do not have adminstrator privaleges to view this page.
+							<?php
+							}
+							} else {
+								?> You need to log in to view this page.
+							<?php
+							}
+							?>
 					</div>
 				</section>
 
