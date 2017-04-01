@@ -39,22 +39,64 @@
 
 				if ( $( this ).prop( "tagName" ) == "item" ) {
 
+					//Get article thumbs  - RS 23/03/2017 
+					var url = $( this ).find( "media\\:thumbnail, thumbnail" ).attr("url" );
+					var imgwidth = $( this ).find( "media\\:thumbnail, thumbnail" ).attr("width" );
+					parseInt(imgwidth);
+							
+					
 					htmlString = "<div class='rssitem'>";
+					
+					//Check if article thumb is empty - if so, set to empty so nothing is displayed - RS 24/03/2017 issue #3
+					if ( (url) == undefined) {
+						var thumb = "";
+					} else {
+						//Cath images smaller that current div width to prevent them pixelating - RS 24/03/2017 issue #2
+						if (imgwidth > 70) {
+							var thumb = "<div width:100%;'><div style='display:inline-block;width:20%'><img style='width:95%;' src='" + (url) + "'></div>";
+						} else {
+							var thumb = "<div width:100%;'><div style='display:inline-block;width:70px; margin-right:20px;'><img  src='" + (url) + "'></div>"; 
+						}
+					}
+					var title;
+					var desc;
+					var link;
+					
 					$( this ).children().each( function () {
 
-
+					//Build variables for title, description and link values - RS 24/03/2017 issue #1
 						if ( $( this ).prop( "tagName" ) == "title" ) {
-							htmlString += "<h2>" + $( this ).text() + "</h2>";
+							title = thumb  + "<div style='display:inline-block;'><h2>" + $( this ).text() + "</h2></div></div>";
 						}
 						if ( $( this ).prop( "tagName" ) == "description" ) {
-							htmlString += "<p style='display:inline; margin-left:25px;'>" + $( this ).text() + "</p>";
+							desc = "<span style='margin-left:25px;'>" + $( this ).text() + "</span><br />";
 						}
 						if ( $( this ).prop( "tagName" ) == "link" ) {
-							htmlString += "<br /><a style='margin-left:25px;' href='" + $( this ).text() + "'>Read more</a>";
+							link = "<a target='_blank' style='margin-left:25px;' href='" + $( this ).text() + "'>Read more</a>";
 						}
 					} );
+					
+					//Build htmls string using previous vars for title, desc and link.  Do not inlclude items not found - RS 24/03/2017 issue #1
+					if (title == undefined) {
+						
+					} else {
+						htmlString += title;
+					}
+					
+					if (desc == undefined) {
+						
+					} else {
+						htmlString += desc;
+					}
+					
+					if (link == undefined) {
+						
+					} else {
+						htmlString += link;
+					}
 
-					htmlString += "</div><br />";
+
+					htmlString += "</div><br /><br />";
 
 					$( "main" ).append( htmlString );
 				}
