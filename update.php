@@ -126,7 +126,7 @@ if (isset($_GET['id'])) {
 						</p>
 						<?php
 						} else {
-							?> You do not have adminstrator privaleges to view this page.
+							?> You do not have adminstrator privileges to view this page.
 						<?php
 						}
 						} else {
