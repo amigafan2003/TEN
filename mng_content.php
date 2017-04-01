@@ -77,7 +77,7 @@ VALUES
 
 	if ( $updateResult ) {
 		//header("location: detail.php?id=" . $_POST['p_id'])
-		$_SESSION[ 'message' ] = "RSS feed updated.<br /><br /><a class='btn' href='comments.php?rssid=" .mysqli_insert_id( $dbconnect ). "'>Test your feed now!</a>  If it doesn't work, amend it, delete it or mark it as not active else the app will crash!";
+		$_SESSION[ 'message' ] = "RSS feed updated.<br /><br /><a class='btn' href='comments.php?rssid=" .$rss_id. "'>Test your feed now!</a>  If it doesn't work, amend it, delete it or mark it as not active else the app will crash!";
 		header( "location: update.php?id=" . $rss_id );
 	} else {
 		$_SESSION[ 'message' ] = "RSS feed could not be updated.";
