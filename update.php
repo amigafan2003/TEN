@@ -1,16 +1,18 @@
 <?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' );
 $pageTitle = "|  Update RSS Feed";
 
-$updateQuery = mysqli_query( $dbconnect,
+if (isset($_GET['id'])) {
+	$updateQuery = mysqli_query( $dbconnect,
 	"SELECT * FROM `RSS`
     WHERE `rss_id`={$_GET['id']}" );
 
-while ( $row = mysqli_fetch_array( $updateQuery ) ) {
-	$id = $row[ 'rss_id' ];
-	$address = $row[ 'address' ];
-	$title = $row[ 'title' ];
-	$category = $row[ 'category' ];
-	$active = $row['active'];
+	while ( $row = mysqli_fetch_array( $updateQuery ) ) {
+		$id = $row[ 'rss_id' ];
+		$address = $row[ 'address' ];
+		$title = $row[ 'title' ];
+		$category = $row[ 'category' ];
+		$active = $row['active'];
+	}
 }
 
 ?>
