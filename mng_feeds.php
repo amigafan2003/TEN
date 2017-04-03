@@ -90,7 +90,7 @@ if($action=='select') {
 			//generate link and title for RSS Feed
 			
 			//Call function to extract feed thum from RSS feed - RS 21/03/2017
-		    $response .= "<div style='float:right; width:200px;>'><img style='margin-left:auto; margin-right:auto; display:block;' src='" . getThumb($rssRow['address']) . "'></div>";
+		    $response .= "<div style='float:right; width:200px;>'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
 		    $response .= "<h2 style='display:inline'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></h2>";
 			
 			//if the flag is set, we are subscribed so do unsubscribe link

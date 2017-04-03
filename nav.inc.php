@@ -7,9 +7,9 @@
 		</li>
 		<?php 
 			if(isset($_SESSION['user_id'])) { ?>
-				<li><a href="feeds.php?userid=<?php echo $_SESSION[user_id] ?>">Feeds</a>
+				<li><a href="feeds.php">Feeds</a>
 				</li>
-				<li><a href="mysubscriptions.php?userid=<?php echo $_SESSION[user_id] ?>">My Subscriptions</a>
+				<li><a href="mysubscriptions.php">My Subscriptions</a>
 				</li>
 				<?php
 					if ( isset( $_SESSION[ "u_level" ] ) ) {

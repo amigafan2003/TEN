@@ -7,6 +7,11 @@
 	License: pixelarity.com/license
 */
 
+.feedThumb {
+	margin-left:auto; 
+	margin-right:auto; 
+	display:block;
+
 .btn-success {
     color: #fff;
     background-color: #5cb85c;
@@ -1124,6 +1129,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 736px) {
 
+		.feedThumb {
+			max-width:900px;
+			max-height:50px;
+		}
 		.row > * {
 			padding: 0 0 0 1.5em;
 		}
@@ -1338,7 +1347,11 @@ div.taped-image img{
 	}
 
 	@media screen and (max-width: 480px) {
-
+		
+		.feedThumb {
+			max-width:70px;
+			max-height:40px;
+		}
 		.map {
 			width: 100%;
 		}
@@ -2363,7 +2376,7 @@ div.taped-image img{
 		}
 
 		h2 {
-			font-size: 1.5em;
+			font-size: 1.2em;
 		}
 
 	}
