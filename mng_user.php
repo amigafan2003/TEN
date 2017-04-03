@@ -150,6 +150,7 @@ if(!$valid) { //if not valid
 			while($row=mysqli_fetch_array($user)) { 
 				$_SESSION['user_id']=$row['user_id'];
 				$_SESSION['u_username']=$row['u_username'];
+				$_SESSION['u_level']=$row['u_level'];
 			}
 			?>
 			<p>Welcome to the site: <a href="myaccount.php"><?php echo $_SESSION['u_username'];?></a> <br />

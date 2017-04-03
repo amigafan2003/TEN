@@ -53,7 +53,7 @@ if($action=='select') {
 	//get all RSS feeds
 	$rssResult = mysqli_query($dbconnect,
 								"SELECT *
-								FROM `RSS` order by title asc");
+								FROM `RSS` WHERE `active` = '1' order by title asc");
 	
 	//flag to see if match with user (if they are subscribed)
 	$matchFlag = false;
@@ -65,10 +65,10 @@ if($action=='select') {
 			//get user linked subscriptions
 			$userResult = mysqli_query($dbconnect,
 							"SELECT *
-							FROM `RSS`
+							FROM `RSS` 
 							INNER JOIN `SUBSCRIPTION`
 							ON `SUBSCRIPTION`.`rss_id` = `RSS`.`rss_id`
-							WHERE `SUBSCRIPTION`.`user_id`={$userId}");
+							WHERE `SUBSCRIPTION`.`user_id`={$userId} AND `RSS`.`active`='1'");
 
 			//this nested loop is for the subscription query
 			while($subRow = mysqli_fetch_array($userResult)) {
