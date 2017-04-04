@@ -56,7 +56,7 @@ if($action=='select') {
 								FROM `RSS`
 								INNER JOIN `SUBSCRIPTION`
 								ON `SUBSCRIPTION`.`rss_id` = `RSS`.`rss_id`
-								WHERE `SUBSCRIPTION`.`user_id`={$userId} AND `RSS`.`active`='1'");
+								WHERE `SUBSCRIPTION`.`user_id`={$userId} AND `RSS`.`active`='1' order by title asc");
 	
 	$rowsRet = mysqli_num_rows($rssResult);
 	if ($rowsRet == 0) {
@@ -67,8 +67,8 @@ if($action=='select') {
 	
 	//loop through RSS feeds
 	while($rssRow = mysqli_fetch_array($rssResult)) {
-			
-			$response .= "<div class='subrow'>";
+			//Edited to allow filtering on category - added RS 04/04/2017			
+			$response .= "<div class='subrow " . $rssRow['category'] . "'>";
 
 			//generate link and title for RSS Feed
 		

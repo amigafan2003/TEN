@@ -84,7 +84,8 @@ if($action=='select') {
 				}
 			}
 
-			$response .= "<div class='subrow'>";
+			//Edited to allow filtering on category - added RS 04/04/2017
+			$response .= "<div id='subrow' class='subrow " . $rssRow['category'] . "'>";
 
 
 			//generate link and title for RSS Feed
