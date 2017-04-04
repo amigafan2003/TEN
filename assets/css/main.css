@@ -7,10 +7,15 @@
 	License: pixelarity.com/license
 */
 
+.content-image-full img {
+	width:33%;
+}
+
 .feedThumb {
 	margin-left:auto; 
 	margin-right:auto; 
 	display:block;
+	max-width: 200px;
 }
 
 .btn-success {
@@ -474,6 +479,10 @@ div.taped-image img{
 	}
 
 	@media screen and (max-width: 1680px) {
+		
+		.content-image-full img {
+			width:40%;
+		}
 
 		.row > * {
 			padding: 0 0 0 1.5em;
@@ -690,6 +699,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 1280px) {
 
+		.content-image-full img {
+			width:47%;
+		}
+		
 		div.contact-left{
 			width: 100%;
 			float: left;
@@ -915,6 +928,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 980px) {
 
+		.content-image-full img {
+			width:54%;
+		}		
+		
 		.row > * {
 			padding: 0 0 0 1.5em;
 		}
@@ -1129,9 +1146,13 @@ div.taped-image img{
 	}
 
 	@media screen and (max-width: 736px) {
-
+		
+		.content-image-full img {
+			width:61%;
+		}
+				
 		.feedThumb {
-			max-width:900px;
+			max-width:100px;
 			max-height:50px;
 		}
 		.row > * {
@@ -1348,9 +1369,13 @@ div.taped-image img{
 	}
 
 	@media screen and (max-width: 480px) {
+
+		.content-image-full img {
+			width:68%;
+		}
 		
 		.feedThumb {
-			max-width:70px;
+			max-width:90px;
 			max-height:40px;
 		}
 		.map {
@@ -1571,6 +1596,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 360px) {
 
+		.content-image-full img {
+			width:75%;
+		}
+		
 		.row > * {
 			padding: 0 0 0 1.5em;
 		}
