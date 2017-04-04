@@ -125,11 +125,47 @@ $user_id = $_SESSION["user_id"];
 		            }
 				}
 			});
-
-
-
 		}
-
+			
+		//Script for filtering by feed category - added RS 03/04/2017
+		$(document).ready(function(){
+			$("#all").click(function(){
+				$(".subrow").show();
+			});
+			$("#business").click(function(){
+				$(".Business").show();
+				$(".subrow:not(.Business)").hide();
+			});
+			$("#finance").click(function(){
+				$(".Finance").show();
+				$(".subrow:not(.Finance)").hide();
+			});
+			$("#general").click(function(){
+				$(".General").show();
+				$(".subrow:not(.General)").hide();
+			});
+			$("#news").click(function(){
+				$(".News").show();
+				$(".subrow:not(.News)").hide();
+			});
+			$("#science").click(function(){
+				$(".Science").show();
+				$(".subrow:not(.Science)").hide();
+			});
+			$("#sport").click(function(){
+				$(".Sport").show();
+				$(".subrow:not(.Sport)").hide();
+			});
+			$("#technology").click(function(){
+				$(".Technology").show();
+				$(".subrow:not(.Technology)").hide();
+			});
+			$("#trivia").click(function(){
+				$(".Trivia").show();
+				$(".subrow:not(.Trivia)").hide();
+			});
+		});
+			
 		</script>
 </head>
 
@@ -152,6 +188,18 @@ $user_id = $_SESSION["user_id"];
 						<?php
 							if (isset($_SESSION["user_id"])) {
 								?>
+							<!--Edited to allow filtering on category - added RS 04/04/2017-->
+							<div id="filter">Filter by: 
+								<a id="all" href="#">Show All</a>  |
+								<a id="business" href="#">Business</a>  |  
+								<a id="finance" href="#">Finance</a>	 |  										
+								<a id="general" href="#">General</a>  |  
+								<a id="news" href="#">News</a>  |  
+								<a id="science" href="#">Science</a>  |  											
+								<a id="sport" href="#">Sport</a>  |  					    								    	
+								<a id="technology" href="#">Technology</a>  |  
+								<a id="trivia" href="#">Trivia</a>
+							</div><br>						
 								<div id="messages">
 
 								</div>
