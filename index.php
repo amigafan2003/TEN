@@ -127,28 +127,47 @@
 						<div class="contact-left">
 							<h5 class="custom">Use the form below to send us your comments</h5>
 							<!-- form -->
-							<form id="formMail" action="#" method="post">
+							<form id="formMail" method="post" action="mailto:31346@blackpool.ac.uk" enctype="text/plain"
 								<fieldset>
 									<p>
 										<label>NAME:</label>
-										<input name="name"  id="name" type="text" />
+										<input name="name"  id="name" type="text" required/>
 									</p>
 									<p>
 										<label>EMAIL:</label>
-										<input name="email"  id="email" type="text" />
+										<input name="email"  id="email" type="text" required/>
 									</p>
 									<p>
 										<label>WEB:</label>
-										<input name="web"  id="web" type="text" />
+										<input name="web"  id="web" type="text" required/>
 									</p>
 									<p>
 										<label>COMMENTS:</label>
-										<textarea  name="comments"  id="comments" rows="5" cols="20" ></textarea>
+										<textarea  name="comments"  id="comments" rows="5" cols="20" required></textarea>
 									</p>
 
-									<p><input type="button" value="Send" name="send" id="send" /></p>
+									<p><input type="button" value="Send" name="send" id="send" /></p> 
+
 								</fieldset>
 							</form>
+																<!--<php (code that didnt work - halp)
+else 
+    {
+    $name=$_REQUEST['name'];
+    $email=$_REQUEST['email'];
+    $message=$_REQUEST['message'];
+    if (($name=="")||($email=="")||($message==""))
+        {
+		echo "All fields are required, please fill <a href=\"\">the form</a> again.";
+	    }
+    else{		
+	    $from="From: $name<$email>\r\nReturn-path: $email";
+        $subject="Message sent using your contact form";
+		// mail("youremail@yoursite.com", $subject, $message, $from);
+		echo "Email sent!";
+	    }
+    }  
+										  </php>--!>
 							<!-- ENDS form -->
 						</div>
 						<!-- ENDS left-content -->
