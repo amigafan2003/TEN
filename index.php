@@ -1,7 +1,7 @@
 <?php session_start(); //call or creates session??> 
 <?php
-include( 'dbconnect.inc.php' );
-$pageTitle = "|  Home";
+	include( 'dbconnect.inc.php' );
+	$pageTitle = "|  Home";
 ?>
 <!DOCTYPE HTML>
 
@@ -17,35 +17,38 @@ $pageTitle = "|  Home";
 	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
 	</script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous">
-	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="assets/js/functions.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="assets/js/main.js"></script>
 
 	<script>
-		$( document ).ready( function () {
-			// Add smooth scrolling to all links
-			$( "a" ).on( 'click', function ( event ) {
+		$(document).ready(function(){
+		  // Add smooth scrolling to all links
+		  $("a").on('click', function(event) {
 
-				// Make sure this.hash has a value before overriding default behavior
-				if ( this.hash !== "" ) {
-					// Prevent default anchor click behavior
-					event.preventDefault();
+			// Make sure this.hash has a value before overriding default behavior
+			if (this.hash !== "") {
+			  // Prevent default anchor click behavior
+			  event.preventDefault();
 
-					// Store hash
-					var hash = this.hash;
+			  // Store hash
+			  var hash = this.hash;
 
-					// Using jQuery's animate() method to add smooth page scroll
-					// The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-					$( 'html, body' ).animate( {
-						scrollTop: $( hash ).offset().top
-					}, 800, function () {
+			  // Using jQuery's animate() method to add smooth page scroll
+			  // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+			  $('html, body').animate({
+				scrollTop: $(hash).offset().top
+			  }, 800, function(){
 
-						// Add hash (#) to URL when done scrolling (default click behavior)
-						window.location.hash = hash;
-					} );
-				} // End if
-			} );
-
+				// Add hash (#) to URL when done scrolling (default click behavior)
+				window.location.hash = hash;
+			  });
+			} // End if
+		  });
+			
 			// validate contact form - added by JM 07/04/2017
 			$( function () {
 
@@ -102,8 +105,8 @@ $pageTitle = "|  Home";
 				} );
 			} );
 
-		} );
-	</script>
+		});
+	</script>	
 </head>
 
 <body>
@@ -137,9 +140,8 @@ $pageTitle = "|  Home";
 										<img src="images/TEN.png" alt="" />
 									</span>
 				
-
 				</section>
-				<br/><br/><br/><br/><br/>
+				<br /><br /><br /><br /><br />
 				<!-- Section -->
 				<section id="about">
 					<header class="major">
@@ -175,10 +177,10 @@ $pageTitle = "|  Home";
 							</div>
 						</article>
 					</div>
-					<br/>
+					<br />
 					<a href="#contact" class="button big">Contact Us</a>
 				</section>
-				<br/><br/><br/><br/><br/>
+				<br /><br /><br /><br /><br />
 				<!-- Section -->
 				<section id="contact">
 					<header class="major">
@@ -206,6 +208,7 @@ $pageTitle = "|  Home";
 
 									<p><input id="submit" type="submit" name="submit" value="Send Message"/>
 									</p>
+									<!--Success or fail for email send from AJAX - added JM 07/04/2017-->
 									<div id="success">
 										<span>Your message was sent succssfully!</span>
 									</div>
@@ -221,10 +224,10 @@ $pageTitle = "|  Home";
 						<!-- right-content -->
 						<div class="contact-right">
 							<h4 class="custom">Location map</h4>
-							<div><span></span><em></em><img class="map" src="images/map.png" alt="map"/>
-							</div>
+							<div><span></span><em></em><img class="map" src="images/map.png" alt="map"/></div>
 							<p>Phone: 01253 352352<br/>
-								<br/> Bispham Campus, Ashfield Rd, Blackpool FY2 0HB</p>
+							 <br/>
+							 Bispham Campus, Ashfield Rd, Blackpool FY2 0HB</p>
 						</div>
 					</div>
 				</section>
@@ -256,6 +259,9 @@ $pageTitle = "|  Home";
 		</div>
 
 	</div>
+
+	<!-- Scripts -->
+
 
 </body>
 
