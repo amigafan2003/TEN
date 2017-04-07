@@ -1,6 +1,6 @@
 <?php
 
-    $to = "amigafan2003@sky.com"; 
+    $to = "amigafan2003@sky.com"; //Change this to whatever TEN will use
     $from = $_REQUEST['email']; 
     $name = $_REQUEST['name']; 
     $headers = "From: $from"; 
