@@ -37,7 +37,6 @@ if(!$valid) { //if not valid
 	//check if username taken
 	if(mysqli_num_rows($userCheck)>0) {
 		$_SESSION['message']="<span style='color:#FF0004;'>Username is taken.</span>";
-		header("location: register.php");	
 	} else {
 		
 		$username = mysqli_escape_string($dbconnect,
@@ -185,3 +184,48 @@ if(!$valid) { //if not valid
 	} //end validation check	
 
 }//end login routine
+
+//Update user profile routine
+if ( $_POST[ 'action' ] == "update" ) { 
+	//sanitise data for entry
+	$user_id = $_SESSION[ 'user_id' ];
+	$username = mysqli_escape_string( $dbconnect,
+		$_POST[ 'username' ] );
+	//update query
+
+	$updateSql = "UPDATE `USER`
+		SET `user_id`='{$user_id}',
+		`u_username`='{$username}'";
+
+	$updateSql .= " WHERE `user_id`={$user_id}";
+	$updateResult = mysqli_query( $dbconnect, $updateSql );
+
+	if ( $updateResult ) {
+		//header("location: detail.php?id=" . $_POST['p_id'])
+		$_SESSION[ 'message' ] = "Your profile has been updated.";
+		header( "location: userupdate.php");
+	} else {
+		$_SESSION[ 'message' ] = "Your profile could not be updated.";
+		header( "location: userupdate.php");
+	}
+
+} //end update
+
+//Delete user acocunt routine
+if ( $_GET[ 'action' ] == "delete" ) { //end insert
+	$deleteQuery = "DELETE from `USER`
+	WHERE
+	`user_id`={$_SESSION['user_id']}";
+	$deleteResult = mysqli_query( $dbconnect, $deleteQuery );
+
+	if ( $deleteResult ) {
+		session_start();
+		session_destroy();
+		session_start();
+		$_SESSION[ 'message' ] = "Account deleted.";
+	} else {
+		$_SESSION[ 'message' ] = "Delete failed :-(";
+	}
+	header( "location: userupdate.php" );
+
+} // end routine
