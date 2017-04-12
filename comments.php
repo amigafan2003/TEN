@@ -1,4 +1,4 @@
-<?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' ); $pageTitle = "|  Feed ".$_GET['rssid']?>
+<?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' ); $pageTitle = "|  Feed ".$_GET['rssid']; $user_id = $_SESSION["user_id"];?>
 <!DOCTYPE HTML>
 
 <html>
@@ -17,7 +17,7 @@
 	<script type="text/javascript">
 		var commentsUpFlag = false;
 		rssId = getUrlParameter( "rssid" );
-		userId = getUrlParameter( "userid" );
+		userId = <?php echo $user_id; ?>;
 
 		//https://api.jquery.com/jQuery.parseXML/
 
@@ -51,7 +51,7 @@
 					if ( (url) == undefined) {
 						var thumb = "";
 					} else {
-						//Cath images smaller that current div width to prevent them pixelating - RS 24/03/2017 issue #2
+						//Catch images smaller that current div width to prevent them pixelating - RS 24/03/2017 issue #2
 						if (imgwidth > 70) {
 							var thumb = "<div width:100%;'><div style='display:inline-block;width:20%'><img style='width:95%;' src='" + (url) + "'></div>";
 						} else {
@@ -345,6 +345,8 @@
 				},
 				complete: function () {
 					$( "#loading" ).hide();
+					$( "#commentscontainer" ).show();
+
 				},
 				type: 'GET',
 				dataType: "jsonp",
@@ -398,22 +400,41 @@
 
 				<!-- Banner -->
 				<section id="banner">
-					<main>
-						<div id="messages">
+					<?php
+						if (isset($_SESSION["user_id"])) {
+						?>
+							<main>
 
-						</div>
+								<div id="loading">
+									<center><img src="images/loading.gif" id="loading" /></center>
+								</div>
 
-					</main>
+							</main>
 
-					<div id="commentscontainer">
-						<a href="#" id="commentslink">Comments</a>
-						<div id="comcontent">
+							<div id="commentscontainer">
+								<div id="messages">
 
-						</div>
-						<textarea id="commentbox"></textarea>
-						<input type="button" value="Add Comment" id="commentbtn" mode="insert"/>
-						<input type="button" value="Clear Comment" id="clearbtn"/>
-					</div>
+								</div>
+								<h3>Comments</h3>
+								<div id="comcontent">
+
+								</div><br>
+								<textarea id="commentbox"></textarea>
+								<input type="button" value="Add Comment" id="commentbtn" mode="insert"/>
+								<input type="button" value="Clear Comment" id="clearbtn"/>
+							</div>
+						<?php
+						} else {
+							?>
+							<script>
+								$( document ).ready( function () {
+									$( "#loading" ).hide();
+								});
+							</script>
+							<p>Please <a href="login.php">login</a> to view this page.</p>
+							<?php
+						}
+					?>
 				</section>
 
 			</div>

@@ -209,13 +209,20 @@ $user_id = $_SESSION["user_id"];
 								<?php
 							} else {
 								?>
+								<script>
+									$( document ).ready( function () {
+										$( "#loading" ).hide();
+									});
+								</script>
 								<p>Please <a href="login.php">login</a> to view this page.</p>
 								<?php
 							}
 						?>
 					</div>
 				</section>
-
+				<div id="loading">
+					<center><img src="images/loading.gif" id="loading" /></center>
+				</div>
 			</div>
 		</div>
 
