@@ -33,9 +33,19 @@ if($action=="select") {
 		while($row = mysqli_fetch_array($result)) {
 
 			//display comment content
-			$response.=  "<div class='comment' comuser='" . $row['user_id'] . "' comid='" . $row['comment_id'] . "'>";
+			$response.=  "<br><br><div class='comment' comuser='" . $row['user_id'] . "' comid='" . $row['comment_id'] . "'>";
+			
+			//Get username - added by RS  12/04/2017
+			$usernameResult = mysqli_query($dbconnect,
+							"SELECT u_username
+							FROM `USER`
+							WHERE `user_id`={$row['user_id']}");
+			
+			$usernameRow = mysqli_fetch_assoc($usernameResult);
+
 			$response.= $row['content'];
 			$response.= "</div>";
+			$response.= "<br><div><a href='profile.php?username=" . $usernameRow['u_username'] .  "'>" . $usernameRow['u_username'] . "</a></div>";
 			//display date / time
 			$response.=  "<div class='comdate'>";
 			$response.=  $row['date_posted'];
