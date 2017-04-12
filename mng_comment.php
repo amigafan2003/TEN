@@ -105,7 +105,7 @@ if($action=="insert") {
 		$response.=  "SUCCESS:<p>Comment added</p>";
 	} else {
 
-		$response.=  $userId;
+		$response.=  "FAIL:<p>Problem adding comment</p>";
 	}
 
 }
