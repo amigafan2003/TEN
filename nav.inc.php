@@ -7,7 +7,20 @@
 		</li>
 		<?php 
 			if(isset($_SESSION['user_id'])) { ?>
-				<li><a href="feeds.php">Feeds</a>
+				<li><span class="opener">Feeds
+					</span>
+					<ul>
+						<li><a href="feeds.php">All feeds</a>
+						</li>
+						<li><a href="rated_feeds.php">Feeds by rating</a>
+						</li>						
+						<li><a href="trending.php">Trending feeds</a>
+						</li>
+						<li><a href="most_subbed_feeds.php">Most subscribed feeds</a>
+						</li>
+						<li><a href="Most_commented_feeds.php">Most commented feeds</a>
+						</li>
+					</ul>
 				</li>
 				<li><a href="mysubscriptions.php">My Subscriptions</a>
 				</li>
