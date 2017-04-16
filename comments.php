@@ -289,7 +289,7 @@
 					type: 'GET',
 					dataType: "jsonp",
 					jsonp: "callback",
-					url: "mng_comment.php?action=delete&comment_id=" + $( this ).attr( 'comid' ),
+					url: "mng_comment.php?action=delete&rating_id=" + $( this ).attr( 'comid' ),
 					success: function ( data ) {
 
 						responseString = "";
@@ -331,7 +331,150 @@
 
 				return false;
 			} );
+			
+			//Feed rating function - added by RS 14/04/2017
+			//RATING RETRIEVAL -----------------------------------------
+			selectRating();
+			
+			
+			//INSERT RATING BUTTON CLICK =================================================
 
+			$( document ).on( "click", '#ratingbtn', function ( event ) {
+
+
+				var ajaxString = "";
+				var ratingContent = $( '#ratingdropdown' ).val();
+
+				if ( ratingContent == "" ) {
+					alert( "You need to enter more than nothing" );
+				} else {
+					ratingContent = encodeURI( ratingContent );
+				}
+
+				//INSERT RATING - SEND --------------------------------------------------------
+
+
+				if ( $( this ).attr( 'mode' ) == 'insert' ) {
+
+					ajaxString = "action=insert&user_id=" + userId + "&rss_id=" + rssId + "&rating_content=" + ratingContent;
+
+				}
+
+
+				$.ajax( {
+					beforeSend: function () {
+						$( "#loading" ).show();
+					},
+					complete: function () {
+						$( "#loading" ).hide();
+					},
+					type: 'GET',
+					dataType: "jsonp",
+					jsonp: "callback",
+					url: "mng_rating.php?" + ajaxString,
+					success: function ( data ) {
+
+						responseString = "";
+
+						$.each( data, function ( index, item ) {
+							// Use item in here
+							responseString = item;
+						} );
+
+
+						if ( responseString.indexOf( "SUCCESS" ) > -1 ) {
+
+							//get rest of data after prefix (SUCCESS:)
+							//the number is the character position to start from, we cut off the prefix
+							responseString = responseString.substring( 8 );
+							selectRating();
+							$("#addrating").hide();
+							$("#addratinginloop").hide();
+						}
+
+						if ( responseString.indexOf( "FAIL" ) > -1 ) {
+
+							//get rest of data after prefix (FAIL:)
+							//the number is the character position to start from, we cut off the prefix
+							responseString = responseString.substring( 5 );
+
+						}
+
+						$( "#messages" ).html( responseString );
+
+					},
+					error: function ( jqXHR, textStatus, errorThrown ) {
+						if ( jqXHR.status == 500 ) {
+							$( "#messages" ).html( 'Internal error: ' + jqXHR.responseText );
+						} else {
+							$( "#messages" ).html( 'Unexpected error.' );
+						}
+					}
+				} );
+
+
+				return false;
+			} );
+
+
+			//DELETE RATING ---------------------------------------------------------------
+			$( document ).on( "click", '#deleterating', function ( event ) {
+
+				$.ajax( {
+					beforeSend: function () {
+						$( "#loading" ).show();
+					},
+					complete: function () {
+						$( "#loading" ).hide();
+					},
+					type: 'GET',
+					dataType: "jsonp",
+					jsonp: "callback",
+					url: "mng_rating.php?action=delete&rating_id=" + $( this ).attr( 'ratingId' ),
+					success: function ( data ) {
+
+						responseString = "";
+
+						$.each( data, function ( index, item ) {
+							// Use item in here
+							responseString = item;
+						} );
+
+
+						if ( responseString.indexOf( "SUCCESS" ) > -1 ) {
+
+							//get rest of data after prefix (SUCCESS:)
+							//the number is the character position to start from, we cut off the prefix
+							responseString = responseString.substring( 8 );
+							selectRating();
+							$("#addrating").show();
+							$("#addratinginloop").show();
+							$("#alreadyrated").hide();
+						}
+
+						if ( responseString.indexOf( "FAIL" ) > -1 ) {
+
+							//get rest of data after prefix (FAIL:)
+							//the number is the character position to start from, we cut off the prefix
+							responseString = responseString.substring( 5 );
+
+						}
+
+						$( "#messages" ).html( responseString );
+
+					},
+					error: function ( jqXHR, textStatus, errorThrown ) {
+						if ( jqXHR.status == 500 ) {
+							$( "#messages" ).html( 'Internal error: ' + jqXHR.responseText );
+						} else {
+							$( "#messages" ).html( 'Unexpected error.' );
+						}
+					}
+				} );
+
+				return false;
+			} );
+			
 		} );
 
 		//COMMENT RETRIEVAL FUNCTION ---------------------------------------------------
@@ -382,6 +525,56 @@
 				}
 			} );
 		}
+		
+		//FEED RATING RETRIEVAL FUNCTION ---------------------------------------------------
+		function selectRating() {
+
+			$( "#rating" ).html( "" );
+
+			$.ajax( {
+				beforeSend: function () {
+					$( "#loading" ).show();
+				},
+				complete: function () {
+					$( "#loading" ).hide();
+					$( "#commentscontainer" ).show();
+
+				},
+				type: 'GET',
+				dataType: "jsonp",
+				jsonp: "callback",
+				url: "mng_rating.php?action=select&user_id=" + userId + "&rss_id=" + rssId,
+				success: function ( data ) {
+
+					responseString = "";
+
+					$.each( data, function ( index, item ) {
+						// Use item in here
+						responseString = item;
+					} );
+
+
+					if ( responseString.indexOf( "SUCCESS" ) > -1 ) {
+
+						//get rest of data after prefix (SUCCESS:)
+						//the number is the character position to start from, we cut off the prefix
+						responseString = responseString.substring( 8 );
+
+					}
+
+					$( "#rating" ).html( responseString );
+
+				},
+				error: function ( jqXHR, textStatus, errorThrown ) {
+					if ( jqXHR.status == 500 ) {
+						$( "#messages" ).html( 'Internal error: ' + jqXHR.responseText );
+					} else {
+						$( "#messages" ).html( 'Unexpected error retrieving rating.' );
+					}
+				}
+			} );
+		}		
+		
 	</script>
 </head>
 
@@ -411,10 +604,60 @@
 
 							</main>
 
+
 							<div id="commentscontainer">
 								<div id="messages">
 
 								</div>
+								<h3>Feed rating</h3>
+								<div id="rating">
+
+								</div><br>
+								<?php 	
+								$rssId = $_GET['rssid'];
+								$userId = $_SESSION[user_id];
+								$isRated = mysqli_query($dbconnect,
+									"SELECT *
+									FROM `RATING`
+									WHERE `rss_id`={$rssId} AND `user_id`={$userId}");
+								while($rating = mysqli_fetch_array($isRated)) {
+									
+										$ratingId = $rating['rating_id'];
+								}
+
+								if(mysqli_num_rows($isRated) >= 1){
+		
+								?>
+									<span id="alreadyrated">
+										<p>You have already rated this feed.</p>
+										<input type="button" value="Delete rating" id="deleterating" ratingId="<?php echo $ratingId ?>" mode="delete"/>
+									</span>
+									<span style="display:none;" id="addratinginloop">
+										<select id="ratingdropdown">
+											<option value="0">Nil stars!</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option selected="true" value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>									
+										</select>
+										<input type="button" value="Add Rating" id="ratingbtn" mode="insert"/>
+									</span>
+											
+								<?php } else { ?>
+									<span id="addrating">
+										<select id="ratingdropdown">
+											<option value="0">Nil stars!</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option selected="true" value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>									
+										</select>
+										<input type="button" value="Add Rating" id="ratingbtn" mode="insert"/>
+									</span>
+								<?php } ?>
+								<br><br>
 								<h3>Comments</h3>
 								<div id="comcontent">
 
