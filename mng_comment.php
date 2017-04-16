@@ -12,7 +12,24 @@ $response = "";
 
 if($action=="select") {
 
+	//Trending functionality - write entry to TREND table everytime an RSS feed is clicked on
+	//get vars
+	$userId = $_GET['user_id'];
+	$rssId = $_GET['rss_id'];
 
+	$result = mysqli_query($dbconnect,
+							"INSERT INTO `TREND`
+							(`user_id`,`rss_id`,`t_date`)
+							VALUES
+							({$userId},{$rssId},NOW())");
+	//Need to work out some kind of error logging to file where fails are invisible to the user
+	//if($result) {
+	//	$response.=  "SUCCESS:<p>Comment added</p>";
+	//} else {
+	//
+	//	$response.=  "FAIL:<p>Problem adding comment</p>";
+	//}
+	
 	//TO-DO: Format date / time
 
 	//get vars
