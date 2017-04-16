@@ -56,7 +56,7 @@ if($action=='select') {
 								FROM `RSS`
 								INNER JOIN `SUBSCRIPTION`
 								ON `SUBSCRIPTION`.`rss_id` = `RSS`.`rss_id`
-								WHERE `SUBSCRIPTION`.`user_id`={$userId} AND `RSS`.`active`='1'");
+								WHERE `SUBSCRIPTION`.`user_id`={$userId} AND `RSS`.`active`='1' order by title asc");
 	
 	$rowsRet = mysqli_num_rows($rssResult);
 	if ($rowsRet == 0) {
@@ -67,16 +67,81 @@ if($action=='select') {
 	
 	//loop through RSS feeds
 	while($rssRow = mysqli_fetch_array($rssResult)) {
-			
-			$response .= "<div class='subrow'>";
+			//Edited to allow filtering on category - added RS 04/04/2017			
+			$response .= "<div class='subrow " . $rssRow['category'] . "'>";
 
 			//generate link and title for RSS Feed
 		
 			//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-		    $response .= "<div style='float:right; width:200px;>'><img style='margin-left:auto; margin-right:auto; display:block;' src='" . getThumb($rssRow['address']) . "'></div>";
+		    $response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' style='margin-left:auto; margin-right:auto; display:block;' src='" . getThumb($rssRow['address']) . "'></div>";
 			$response .= "<h2 style='display:inline'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></h2>";
 
+			//Get rating - added by RS 14/04/2017
+			//Test if feed is rated
+			//get count of rating entires
+			$isRated = mysqli_query($dbconnect,
+									"SELECT rating_id
+									FROM `RATING`
+									WHERE `rss_id`={$rssRow['rss_id']}");
 
+			if(mysqli_num_rows($isRated)==0){
+				
+			} else {
+
+				//get count of rating entires
+				$getCount = mysqli_query($dbconnect,
+										"SELECT COUNT(rating_id) as 'count'
+										FROM `RATING`
+										WHERE `rss_id`={$rssRow['rss_id']}");	
+
+				if($getCount) {
+
+					while($countRow = mysqli_fetch_array($getCount)){
+						$count = $countRow['count'];
+					}
+
+					//get count of rating entires
+					$getSum = mysqli_query($dbconnect,
+											"SELECT SUM(r_score) as 'sum' 
+											FROM `RATING` WHERE `rss_id`={$rssRow['rss_id']}");
+					if($getSum){
+						while($sumRow = mysqli_fetch_array($getSum)){
+							$sum = $sumRow['sum'];
+
+							$rating = ($sum / $count);
+
+							if ($rating > 4.75){
+								$response.=  "<img class='starrating' height='25px;' src='images/5stars.png'>";
+							} else if ($rating > 4.25){
+								$response.=  "<img class='starrating' height='25px;' src='images/4_5stars.png'>";
+							} else if ($rating > 3.75){
+								$response.=  "<img class='starrating' height='25px;' src='images/4stars.png'>";
+							} else if ($rating > 3.25){
+								$response.=  "<img class='starrating' height='25px;' src='images/3_5stars.png'>";
+							} else if ($rating > 2.75){
+								$response.=  "<img class='starrating' height='25px;' src='images/3stars.png'>";
+							} else if ($rating > 2.25){
+								$response.=  "<img class='starrating' height='25px;' src='images/2_5stars.png'>";
+							} else if ($rating > 1.75){
+								$response.=  "<img class='starrating' height='25px;' src='images/2stars.png'>";
+							} else if ($rating > 1.25){
+								$response.=  "<img class='starrating' height='25px;' src='images/1_5stars.png'>";
+							} else if ($rating > 0.75){
+								$response.=  "<img class='starrating' height='25px;' src='images/1stars.png'>";
+							} else if ($rating > 0.25){
+								$response.=  "<img class='starrating' height='25px;' src='images/0_5stars.png'>";
+							} else {
+								$response.=  "<span class='starrating' style='margin-left:25px'>Nil Rating!</span>";
+							}
+						} 	
+					} else {
+						
+					}
+				} else {
+					
+				}
+			}
+		
 			$response .= "<div class='sublinkbar'><a href='#' class='sublink' action='unsubscribe' rssid='" . $rssRow['rss_id'] . "' >Unsubscribe</a></div><br />";
 
 

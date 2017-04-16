@@ -51,10 +51,31 @@
 	bottom: -30em;
 }
 
+/*********************************************************************************/
+/* TEN specific                                                                  */
+/*********************************************************************************/
+
+.icon	{
+	margin-right:50px;
+}
+
+.starrating {
+	padding-left: 25px;
+}
+
+.content-image-full img {
+	width:33%;
+}
+
 .feedThumb {
 	margin-left:auto; 
 	margin-right:auto; 
 	display:block;
+	max-width: 200px;
+}
+
+.thumb-container {
+	width:200px;
 }
 
 .btn-success {
@@ -518,6 +539,10 @@ div.taped-image img{
 	}
 
 	@media screen and (max-width: 1680px) {
+		
+		.content-image-full img {
+			width:40%;
+		}
 
 		.row > * {
 			padding: 0 0 0 1.5em;
@@ -734,6 +759,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 1280px) {
 
+		.content-image-full img {
+			width:47%;
+		}
+		
 		div.contact-left{
 			width: 100%;
 			float: left;
@@ -959,6 +988,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 980px) {
 
+		.content-image-full img {
+			width:54%;
+		}		
+		
 		.row > * {
 			padding: 0 0 0 1.5em;
 		}
@@ -1173,9 +1206,27 @@ div.taped-image img{
 	}
 
 	@media screen and (max-width: 736px) {
-
+		
+		#loading {
+			width:100%;
+		}
+		
+		.icon	{
+			margin-right:20px;
+		}
+		
+		.starrating {
+			height:15px;
+			padding-left:10px;
+			margin-top:5px;
+		}
+		
+		.content-image-full img {
+			width:61%;
+		}
+				
 		.feedThumb {
-			max-width:900px;
+			max-width:100px;
 			max-height:50px;
 		}
 		.row > * {
@@ -1392,9 +1443,28 @@ div.taped-image img{
 	}
 
 	@media screen and (max-width: 480px) {
+
+		.icon	{
+			margin-right:20px;
+		}
+		
+		.thumb-container{
+			width:100px;
+		}
+		.thumb-container-t {
+			display:none;
+		}
+		.starrating {
+			height:12px;
+			padding-left:10px;
+			margin-top:5px;
+		}
+		.content-image-full img {
+			width:68%;
+		}
 		
 		.feedThumb {
-			max-width:70px;
+			max-width:90px;
 			max-height:40px;
 		}
 		.map {
@@ -1615,6 +1685,13 @@ div.taped-image img{
 
 	@media screen and (max-width: 360px) {
 
+		.content-image-full img {
+			width:75%;
+		}
+		
+		.thumb-container-t {
+			display:none;
+		}
 		.row > * {
 			padding: 0 0 0 1.5em;
 		}
@@ -2363,7 +2440,7 @@ div.taped-image img{
 		font-family: "Roboto Slab", serif;
 		font-weight: 700;
 		line-height: 1.5;
-		margin: 0 0 1em 0;
+		margin: 0 0 0 0;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {

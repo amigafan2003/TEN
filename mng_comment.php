@@ -12,7 +12,24 @@ $response = "";
 
 if($action=="select") {
 
+	//Trending functionality - write entry to TREND table everytime an RSS feed is clicked on
+	//get vars
+	$userId = $_GET['user_id'];
+	$rssId = $_GET['rss_id'];
 
+	$result = mysqli_query($dbconnect,
+							"INSERT INTO `TREND`
+							(`user_id`,`rss_id`,`t_date`)
+							VALUES
+							({$userId},{$rssId},NOW())");
+	//Need to work out some kind of error logging to file where fails are invisible to the user
+	//if($result) {
+	//	$response.=  "SUCCESS:<p>Comment added</p>";
+	//} else {
+	//
+	//	$response.=  "FAIL:<p>Problem adding comment</p>";
+	//}
+	
 	//TO-DO: Format date / time
 
 	//get vars
@@ -33,9 +50,19 @@ if($action=="select") {
 		while($row = mysqli_fetch_array($result)) {
 
 			//display comment content
-			$response.=  "<div class='comment' comuser='" . $row['user_id'] . "' comid='" . $row['comment_id'] . "'>";
+			$response.=  "<br><br><div class='comment' comuser='" . $row['user_id'] . "' comid='" . $row['comment_id'] . "'>";
+			
+			//Get username - added by RS  12/04/2017
+			$usernameResult = mysqli_query($dbconnect,
+							"SELECT u_username
+							FROM `USER`
+							WHERE `user_id`={$row['user_id']}");
+			
+			$usernameRow = mysqli_fetch_assoc($usernameResult);
+
 			$response.= $row['content'];
 			$response.= "</div>";
+			$response.= "<br><div><a href='profile.php?username=" . $usernameRow['u_username'] .  "'>" . $usernameRow['u_username'] . "</a></div>";
 			//display date / time
 			$response.=  "<div class='comdate'>";
 			$response.=  $row['date_posted'];

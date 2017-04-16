@@ -1,4 +1,4 @@
-<?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' ); $pageTitle = "|  Feeds"; $user_id = $_SESSION["user_id"]; ?>
+<?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' ); $pageTitle = "|  Trending Feeds"; $user_id = $_SESSION["user_id"]; ?>
 <!DOCTYPE HTML>
 
 <html>
@@ -37,7 +37,7 @@
 					type: 'GET',
 					dataType: "jsonp",
 					jsonp: "callback",
-					url: "mng_feeds.php?action=" + action + "&user_id=" + userid + "&rss_id=" + rssid,
+					url: "mng_trending.php?action=" + action + "&user_id=" + userid + "&rss_id=" + rssid,
 					success: function ( data ) {
 
 						responseString = "";
@@ -98,7 +98,7 @@
 				type: 'GET',
 				dataType: "jsonp",
 				jsonp: "callback",
-				url: "mng_feeds.php?action=select&user_id=" + userid,
+				url: "mng_trending.php?action=select&user_id=" + userid,
 				success: function ( data ) {
 
 					responseString = "";
@@ -120,45 +120,32 @@
 				}
 			} );
 		}
-		
-		//Script for filtering by feed category - added RS 03/04/2017
+
+		//Script for filtering by trend timescale - added RS 14/04/2017
 		$(document).ready(function(){
+			$("#today").click(function(){
+				$(".today").show();
+				$("#trend:not(.today)").hide();
+			});
+			$("#yesterday").click(function(){
+				$(".yesterday").show();
+				$("#trend:not(.yesterday)").hide();
+			});
+			$("#week").click(function(){
+				$(".week").show();
+				$("#trend:not(.week)").hide();
+			});
+			$("#month").click(function(){
+				$(".month").show();
+				$("#trend:not(.month)").hide();
+			});
 			$("#all").click(function(){
-				$(".subrow").show();
-			});
-			$("#business").click(function(){
-				$(".Business").show();
-				$(".subrow:not(.Business)").hide();
-			});
-			$("#finance").click(function(){
-				$(".Finance").show();
-				$(".subrow:not(.Finance)").hide();
-			});
-			$("#general").click(function(){
-				$(".General").show();
-				$(".subrow:not(.General)").hide();
-			});
-			$("#news").click(function(){
-				$(".News").show();
-				$(".subrow:not(.News)").hide();
-			});
-			$("#science").click(function(){
-				$(".Science").show();
-				$(".subrow:not(.Science)").hide();
-			});
-			$("#sport").click(function(){
-				$(".Sport").show();
-				$(".subrow:not(.Sport)").hide();
-			});
-			$("#technology").click(function(){
-				$(".Technology").show();
-				$(".subrow:not(.Technology)").hide();
-			});
-			$("#trivia").click(function(){
-				$(".Trivia").show();
-				$(".subrow:not(.Trivia)").hide();
+				$(".all").show();
+				$("#trend:not(.all)").hide();
 			});
 		});
+		
+
 		
 	</script>
 </head>
@@ -182,18 +169,16 @@
 						<?php
 							if (isset($_SESSION["user_id"])) {
 								?>
-							<!--Edited to allow filtering on category - added RS 04/04/2017-->
-							<div id="filter">Filter by: 
-								<a id="all" href="#">Show All</a>  |
-								<a id="business" href="#">Business</a>  |  
-								<a id="finance" href="#">Finance</a>	 |  										
-								<a id="general" href="#">General</a>  |  
-								<a id="news" href="#">News</a>  |  
-								<a id="science" href="#">Science</a>  |  											
-								<a id="sport" href="#">Sport</a>  |  					    								    	
-								<a id="technology" href="#">Technology</a>  |  
-								<a id="trivia" href="#">Trivia</a>
-							</div><br>
+						
+								<!--Edited to allow filtering on trend timescale - added RS 14/04/2017-->
+								<div id="filtertrend">Filter trend timescale by: 
+									<a id="today" href="#">Today</a>  |
+									<a id="yesterday" href="#">Yesterday</a>  |  
+									<a id="week" href="#">Last Week</a>	 |  										
+									<a id="month" href="#">Last Month</a>  |  
+									<a id="all" href="#">All time trend</a>    
+								</div><br>
+								
 								<div id="messages">
 
 								</div>
@@ -216,7 +201,7 @@
 
 				</section>
 				<div id="loading">
-					<center><img src="images/loading.gif" id="loading" /></center>
+					<center><img src="images/loading.gif" id="loading" /><h2>This may take a some time while we check our stats, our users have been very active!</h2></center>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-<?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' ); $pageTitle = "|  Feeds"; $user_id = $_SESSION["user_id"]; ?>
+<?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' ); $pageTitle = "| Rated Feeds"; $user_id = $_SESSION["user_id"]; ?>
 <!DOCTYPE HTML>
 
 <html>
@@ -37,7 +37,7 @@
 					type: 'GET',
 					dataType: "jsonp",
 					jsonp: "callback",
-					url: "mng_feeds.php?action=" + action + "&user_id=" + userid + "&rss_id=" + rssid,
+					url: "mng_rated_feeds.php?action=" + action + "&user_id=" + userid + "&rss_id=" + rssid,
 					success: function ( data ) {
 
 						responseString = "";
@@ -98,7 +98,7 @@
 				type: 'GET',
 				dataType: "jsonp",
 				jsonp: "callback",
-				url: "mng_feeds.php?action=select&user_id=" + userid,
+				url: "mng_rated_feeds.php?action=select&user_id=" + userid,
 				success: function ( data ) {
 
 					responseString = "";
@@ -121,42 +121,39 @@
 			} );
 		}
 		
-		//Script for filtering by feed category - added RS 03/04/2017
+		//Script for filtering by rating - added RS 14/04/2017
 		$(document).ready(function(){
 			$("#all").click(function(){
-				$(".subrow").show();
+				$(".fivestars").show();
+				$(".fourstars").show();
+				$(".threestars").show();
+				$(".twostars").show();
+				$(".onestars").show();
+				$(".nil").show();
 			});
-			$("#business").click(function(){
-				$(".Business").show();
-				$(".subrow:not(.Business)").hide();
+			$("#fivestars").click(function(){
+				$(".fivestars").show();
+				$("#subrow:not(.fivestars)").hide();							
 			});
-			$("#finance").click(function(){
-				$(".Finance").show();
-				$(".subrow:not(.Finance)").hide();
+			$("#fourstars").click(function(){
+				$(".fourstars").show();
+				$("#subrow:not(.fourstars)").hide();
 			});
-			$("#general").click(function(){
-				$(".General").show();
-				$(".subrow:not(.General)").hide();
+			$("#threestars").click(function(){
+				$(".threestars").show();
+				$("#subrow:not(.threestars)").hide();
 			});
-			$("#news").click(function(){
-				$(".News").show();
-				$(".subrow:not(.News)").hide();
+			$("#twostars").click(function(){
+				$(".twostars").show();
+				$("#subrow:not(.twostars)").hide();
 			});
-			$("#science").click(function(){
-				$(".Science").show();
-				$(".subrow:not(.Science)").hide();
+			$("#onestars").click(function(){
+				$(".onestars").show();
+				$("#subrow:not(.onestars)").hide();
 			});
-			$("#sport").click(function(){
-				$(".Sport").show();
-				$(".subrow:not(.Sport)").hide();
-			});
-			$("#technology").click(function(){
-				$(".Technology").show();
-				$(".subrow:not(.Technology)").hide();
-			});
-			$("#trivia").click(function(){
-				$(".Trivia").show();
-				$(".subrow:not(.Trivia)").hide();
+			$("#nil").click(function(){
+				$(".nil").show();
+				$("#subrow:not(.nil)").hide();
 			});
 		});
 		
@@ -182,18 +179,16 @@
 						<?php
 							if (isset($_SESSION["user_id"])) {
 								?>
-							<!--Edited to allow filtering on category - added RS 04/04/2017-->
-							<div id="filter">Filter by: 
-								<a id="all" href="#">Show All</a>  |
-								<a id="business" href="#">Business</a>  |  
-								<a id="finance" href="#">Finance</a>	 |  										
-								<a id="general" href="#">General</a>  |  
-								<a id="news" href="#">News</a>  |  
-								<a id="science" href="#">Science</a>  |  											
-								<a id="sport" href="#">Sport</a>  |  					    								    	
-								<a id="technology" href="#">Technology</a>  |  
-								<a id="trivia" href="#">Trivia</a>
-							</div><br>
+								<!--Edited to allow filtering by rating - added RS 14/04/2017-->
+								<div id="filtertrend">Filter by rating: 
+									<a id="all" href="#">All</a>  |
+									<a id="fivestars" href="#"><img height="15px" src="images/5stars.png"></a> |
+									<a id="fourstars" href="#"><img height="15px" src="images/4stars.png"></a> |  										
+									<a id="threestars" href="#"><img height="15px" src="images/3stars.png"></a> |
+									<a id="twostars" href="#"><img height="15px" src="images/2stars.png"></a> |
+									<a id="onestars" href="#"><img height="15px" src="images/1stars.png"></a> |
+									<a id="nil" href="#">Nil rating!</a>   
+								</div><br>
 								<div id="messages">
 
 								</div>
