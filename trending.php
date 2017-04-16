@@ -201,7 +201,7 @@
 
 				</section>
 				<div id="loading">
-					<center><img src="images/loading.gif" id="loading" /><br><br><h2>This may take a some time while we check our stats, our users have been very active!</h2></center>
+					<center><img src="images/loading.gif" id="loading" /><h2>This may take a some time while we check our stats, our users have been very active!</h2></center>
 				</div>
 			</div>
 		</div>
