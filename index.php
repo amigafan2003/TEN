@@ -15,8 +15,15 @@
 	<link rel="stylesheet" href="assets/css/main.css"/>
 	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	<script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="assets/js/functions.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="assets/js/main.js"></script>
+
 	<script>
 		$(document).ready(function(){
 		  // Add smooth scrolling to all links
@@ -41,6 +48,63 @@
 			  });
 			} // End if
 		  });
+			
+			// validate contact form - added by JM 07/04/2017
+			$( function () {
+
+				//Validate form
+				$( '#contactform' ).validate( {
+					rules: {
+						name: {
+							required: true,
+							minlength: 2
+						},
+						email: {
+							required: true,
+							email: true
+						},
+						message: {
+							required: true,
+							minlength: 10
+						},
+					},
+					messages: {
+						name: {
+							required: "Come on, you have a name don't you?",
+							minlength: "Your name must consist of at least 2 characters"
+						},
+						email: {
+							required: "No email, no message"
+						},
+						message: {
+							required: "Um...yea, you have to write something to send this form.",
+							minlength: "Thats all? Really?"
+						},
+					},
+
+
+					//Submit form		
+					submitHandler: function () {
+						$.ajax( {
+							type: "POST",
+							data: $( '#contactform' ).serialize(),
+							url: "process.php",
+							//If form submitted successfully sdisable submit button and show success message
+							success: function () {
+								$( '#contact :input' ).attr( 'disabled', 'disabled' );
+								$( '#success' ).fadeIn();
+							},
+							//If form NOT submitted successfully show error message
+							error: function () {
+								$( '#contact' ).fadeTo( "slow", 0.15, function () {
+									$( '#error' ).fadeIn();
+								} );
+							}
+						} );
+					}
+				} );
+			} );
+
 		});
 	</script>	
 </head>
@@ -127,26 +191,30 @@
 						<div class="contact-left">
 							<h5 class="custom">Use the form below to send us your comments</h5>
 							<!-- form -->
-							<form id="formMail" action="#" method="post">
+							<form id="contactform" name="contactform" method="post">
 								<fieldset>
 									<p>
 										<label>NAME:</label>
-										<input name="name"  id="name" type="text" />
+										<input name="name" id="name" type="text" required/>
 									</p>
 									<p>
 										<label>EMAIL:</label>
-										<input name="email"  id="email" type="text" />
+										<input name="email" id="email" type="text" required/>
 									</p>
 									<p>
-										<label>WEB:</label>
-										<input name="web"  id="web" type="text" />
-									</p>
-									<p>
-										<label>COMMENTS:</label>
-										<textarea  name="comments"  id="comments" rows="5" cols="20" ></textarea>
+										<label>MESSAGE:</label>
+										<textarea name="message" id="message" rows="5" cols="20" required></textarea>
 									</p>
 
-									<p><input type="button" value="Send" name="send" id="send" /></p>
+									<p><input id="submit" type="submit" name="submit" value="Send Message"/>
+									</p>
+									<!--Success or fail for email send from AJAX - added JM 07/04/2017-->
+									<div id="success">
+										<span>Your message was sent succssfully!</span>
+									</div>
+									<div id="error">
+										<span>Something went wrong, try refreshing and submitting the form again.</span>
+									</div>
 								</fieldset>
 							</form>
 							<!-- ENDS form -->
@@ -193,11 +261,7 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="assets/js/main.js"></script>
+
 
 </body>
 
