@@ -289,7 +289,7 @@
 					type: 'GET',
 					dataType: "jsonp",
 					jsonp: "callback",
-					url: "mng_comment.php?action=delete&rating_id=" + $( this ).attr( 'comid' ),
+					url: "mng_comment.php?action=delete&comment_id=" + $( this ).attr( 'comid' ),
 					success: function ( data ) {
 
 						responseString = "";
