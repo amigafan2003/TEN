@@ -104,8 +104,8 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
+					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -145,23 +145,23 @@ if($action=='select') {
 									if ($rating > 4.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
 									} else if ($rating > 4.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4_5stars.png'>";
 									} else if ($rating > 3.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
 									} else if ($rating > 3.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3_5stars.png'>";
 									} else if ($rating > 2.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
 									} else if ($rating > 2.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2_5stars.png'>";
 									} else if ($rating > 1.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
 									} else if ($rating > 1.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1_5stars.png'>";
 									} else if ($rating > 0.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
 									} else if ($rating > 0.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/0_5stars.png'>";
 									} else {
 										$response.=  "<span style='starrating'>Nil Rating!</span>";
 									}
@@ -250,8 +250,8 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
+					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -291,23 +291,23 @@ if($action=='select') {
 									if ($rating > 4.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
 									} else if ($rating > 4.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4_5stars.png'>";
 									} else if ($rating > 3.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
 									} else if ($rating > 3.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3_5stars.png'>";
 									} else if ($rating > 2.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
 									} else if ($rating > 2.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2_5stars.png'>";
 									} else if ($rating > 1.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
 									} else if ($rating > 1.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1_5stars.png'>";
 									} else if ($rating > 0.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
 									} else if ($rating > 0.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/0_5stars.png'>";
 									} else {
 										$response.=  "<span style='starrating'>Nil Rating!</span>";
 									}
@@ -395,8 +395,8 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
+					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -436,23 +436,23 @@ if($action=='select') {
 									if ($rating > 4.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
 									} else if ($rating > 4.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4_5stars.png'>";
 									} else if ($rating > 3.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
 									} else if ($rating > 3.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3_5stars.png'>";
 									} else if ($rating > 2.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
 									} else if ($rating > 2.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2_5stars.png'>";
 									} else if ($rating > 1.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
 									} else if ($rating > 1.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1_5stars.png'>";
 									} else if ($rating > 0.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
 									} else if ($rating > 0.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/0_5stars.png'>";
 									} else {
 										$response.=  "<span style='starrating'>Nil Rating!</span>";
 									}
@@ -540,8 +540,8 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
+					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -581,23 +581,23 @@ if($action=='select') {
 									if ($rating > 4.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
 									} else if ($rating > 4.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4_5stars.png'>";
 									} else if ($rating > 3.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
 									} else if ($rating > 3.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3_5stars.png'>";
 									} else if ($rating > 2.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
 									} else if ($rating > 2.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2_5stars.png'>";
 									} else if ($rating > 1.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
 									} else if ($rating > 1.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1_5stars.png'>";
 									} else if ($rating > 0.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
 									} else if ($rating > 0.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/0_5stars.png'>";
 									} else {
 										$response.=  "<span style='starrating'>Nil Rating!</span>";
 									}
@@ -679,8 +679,8 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
+					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -720,23 +720,23 @@ if($action=='select') {
 									if ($rating > 4.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
 									} else if ($rating > 4.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4_5stars.png'>";
 									} else if ($rating > 3.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
 									} else if ($rating > 3.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3_5stars.png'>";
 									} else if ($rating > 2.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
 									} else if ($rating > 2.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2_5stars.png'>";
 									} else if ($rating > 1.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
 									} else if ($rating > 1.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1_5stars.png'>";
 									} else if ($rating > 0.75){
 										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
 									} else if ($rating > 0.25){
-										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/0_5stars.png'>";
 									} else {
 										$response.=  "<span style='starrating'>Nil Rating!</span>";
 									}

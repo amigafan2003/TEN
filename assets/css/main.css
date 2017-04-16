@@ -7,6 +7,10 @@
 	License: pixelarity.com/license
 */
 
+.icon	{
+	margin-right:50px;
+}
+
 .starrating {
 	padding-left: 25px;
 }
@@ -1155,6 +1159,14 @@ div.taped-image img{
 
 	@media screen and (max-width: 736px) {
 		
+		#loading {
+			width:100%;
+		}
+		
+		.icon	{
+			margin-right:20px;
+		}
+		
 		.starrating {
 			height:15px;
 			padding-left:10px;
@@ -1384,6 +1396,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 480px) {
 
+		.icon	{
+			margin-right:20px;
+		}
+		
 		.thumb-container{
 			width:100px;
 		}
