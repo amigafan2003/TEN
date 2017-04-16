@@ -99,9 +99,9 @@ if($action=='select') {
 				//generate link and title for RSS Feed
 
 				//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-				$response .= "<div style='float:right; width:200px;>'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+				$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
 				$response .= "<h2 style='display:inline; float:left; margin-right:50px;' ><img style='padding-top:10px; display:inline;' src='images/comment.png' width='25px'> " . $count . "</h2>";
-				$response .= "<h2 style='margin:0;'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' ><span style='margin-right:25px'>" . $rssRow['title'] . "</span></a>";
+				$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a>";
 			
 				//Get rating - added by RS 14/04/2017
 					//Test if feed is rated
@@ -138,27 +138,27 @@ if($action=='select') {
 									$rating = ($sum / $count);
 
 									if ($rating > 4.75){
-										$response.=  "<img height='25px;' src='images/5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
 									} else if ($rating > 4.25){
-										$response.=  "<img height='25px;' src='images/4.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
 									} else if ($rating > 3.75){
-										$response.=  "<img height='25px;' src='images/4stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
 									} else if ($rating > 3.25){
-										$response.=  "<img height='25px;' src='images/3.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
 									} else if ($rating > 2.75){
-										$response.=  "<img height='25px;' src='images/3stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
 									} else if ($rating > 2.25){
-										$response.=  "<img height='25px;' src='images/2.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
 									} else if ($rating > 1.75){
-										$response.=  "<img height='25px;' src='images/2stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
 									} else if ($rating > 1.25){
-										$response.=  "<img height='25px;' src='images/1.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
 									} else if ($rating > 0.75){
-										$response.=  "<img height='25px;' src='images/1stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
 									} else if ($rating > 0.25){
-										$response.=  "<img height='25px;' src='images/0.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
 									} else {
-										$response.=  "<span style='font-weight:100;'>Nil Rating!</span>";
+										$response.=  "<span class='starrating' style='font-weight:100;'>Nil Rating!</span>";
 									}
 								} 	
 							} else {

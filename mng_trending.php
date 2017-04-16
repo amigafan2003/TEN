@@ -104,9 +104,9 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right; width:200px;>'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
 					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
-					$response .= "<h2 style='margin:0px;'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' ><span style='margin-right:25px'>" . $rssRow['title'] . "</span></a>";
+					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a>";
 
 					//Get rating - added by RS 14/04/2017
 					//Test if feed is rated
@@ -143,27 +143,27 @@ if($action=='select') {
 									$rating = ($sum / $count);
 
 									if ($rating > 4.75){
-										$response.=  "<img height='25px;' src='images/5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
 									} else if ($rating > 4.25){
-										$response.=  "<img height='25px;' src='images/4.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
 									} else if ($rating > 3.75){
-										$response.=  "<img height='25px;' src='images/4stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
 									} else if ($rating > 3.25){
-										$response.=  "<img height='25px;' src='images/3.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
 									} else if ($rating > 2.75){
-										$response.=  "<img height='25px;' src='images/3stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
 									} else if ($rating > 2.25){
-										$response.=  "<img height='25px;' src='images/2.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
 									} else if ($rating > 1.75){
-										$response.=  "<img height='25px;' src='images/2stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
 									} else if ($rating > 1.25){
-										$response.=  "<img height='25px;' src='images/1.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
 									} else if ($rating > 0.75){
-										$response.=  "<img height='25px;' src='images/1stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
 									} else if ($rating > 0.25){
-										$response.=  "<img height='25px;' src='images/0.5stars.png'>";
+										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
 									} else {
-										$response.=  "Nil Rating!";
+										$response.=  "<span style='starrating'>Nil Rating!</span>";
 									}
 								} 	
 							} else {
@@ -250,10 +250,77 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right; width:200px;>'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
 					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
-					$response .= "<h2 style='margin:0px;'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></h2>";
+					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
+					//Get rating - added by RS 14/04/2017
+					//Test if feed is rated
+					//get count of rating entires
+					$isRated = mysqli_query($dbconnect,
+											"SELECT rating_id
+											FROM `RATING`
+											WHERE `rss_id`={$rssRow['rss_id']}");
+
+					if(mysqli_num_rows($isRated)==0){
+
+					} else {
+
+						//get count of rating entires
+						$getCount = mysqli_query($dbconnect,
+												"SELECT COUNT(rating_id) as 'count'
+												FROM `RATING`
+												WHERE `rss_id`={$rssRow['rss_id']}");	
+
+						if($getCount) {
+
+							while($countRow = mysqli_fetch_array($getCount)){
+								$count = $countRow['count'];
+							}
+
+							//get count of rating entires
+							$getSum = mysqli_query($dbconnect,
+													"SELECT SUM(r_score) as 'sum' 
+													FROM `RATING` WHERE `rss_id`={$rssRow['rss_id']}");
+							if($getSum){
+								while($sumRow = mysqli_fetch_array($getSum)){
+									$sum = $sumRow['sum'];
+
+									$rating = ($sum / $count);
+
+									if ($rating > 4.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
+									} else if ($rating > 4.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+									} else if ($rating > 3.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
+									} else if ($rating > 3.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+									} else if ($rating > 2.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
+									} else if ($rating > 2.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+									} else if ($rating > 1.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
+									} else if ($rating > 1.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+									} else if ($rating > 0.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
+									} else if ($rating > 0.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+									} else {
+										$response.=  "<span style='starrating'>Nil Rating!</span>";
+									}
+								} 	
+							} else {
+
+							}
+						} else {
+
+						}
+					}	
+					$response .= "</h2>";
+				
 					//if the flag is set, we are subscribed so do unsubscribe link
 					//otherwise do subscribe link
 					if($matchFlag) {
@@ -328,10 +395,77 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right; width:200px;>'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
 					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
-					$response .= "<h2 style='margin:0px;'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></h2>";
+					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
+					//Get rating - added by RS 14/04/2017
+					//Test if feed is rated
+					//get count of rating entires
+					$isRated = mysqli_query($dbconnect,
+											"SELECT rating_id
+											FROM `RATING`
+											WHERE `rss_id`={$rssRow['rss_id']}");
+
+					if(mysqli_num_rows($isRated)==0){
+
+					} else {
+
+						//get count of rating entires
+						$getCount = mysqli_query($dbconnect,
+												"SELECT COUNT(rating_id) as 'count'
+												FROM `RATING`
+												WHERE `rss_id`={$rssRow['rss_id']}");	
+
+						if($getCount) {
+
+							while($countRow = mysqli_fetch_array($getCount)){
+								$count = $countRow['count'];
+							}
+
+							//get count of rating entires
+							$getSum = mysqli_query($dbconnect,
+													"SELECT SUM(r_score) as 'sum' 
+													FROM `RATING` WHERE `rss_id`={$rssRow['rss_id']}");
+							if($getSum){
+								while($sumRow = mysqli_fetch_array($getSum)){
+									$sum = $sumRow['sum'];
+
+									$rating = ($sum / $count);
+
+									if ($rating > 4.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
+									} else if ($rating > 4.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+									} else if ($rating > 3.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
+									} else if ($rating > 3.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+									} else if ($rating > 2.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
+									} else if ($rating > 2.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+									} else if ($rating > 1.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
+									} else if ($rating > 1.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+									} else if ($rating > 0.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
+									} else if ($rating > 0.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+									} else {
+										$response.=  "<span style='starrating'>Nil Rating!</span>";
+									}
+								} 	
+							} else {
+
+							}
+						} else {
+
+						}
+					}	
+					$response .= "</h2>";
+				
 					//if the flag is set, we are subscribed so do unsubscribe link
 					//otherwise do subscribe link
 					if($matchFlag) {
@@ -406,10 +540,77 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right; width:200px;>'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
 					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
-					$response .= "<h2 style='margin:0px;'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></h2>";
+					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
+					//Get rating - added by RS 14/04/2017
+					//Test if feed is rated
+					//get count of rating entires
+					$isRated = mysqli_query($dbconnect,
+											"SELECT rating_id
+											FROM `RATING`
+											WHERE `rss_id`={$rssRow['rss_id']}");
+
+					if(mysqli_num_rows($isRated)==0){
+
+					} else {
+
+						//get count of rating entires
+						$getCount = mysqli_query($dbconnect,
+												"SELECT COUNT(rating_id) as 'count'
+												FROM `RATING`
+												WHERE `rss_id`={$rssRow['rss_id']}");	
+
+						if($getCount) {
+
+							while($countRow = mysqli_fetch_array($getCount)){
+								$count = $countRow['count'];
+							}
+
+							//get count of rating entires
+							$getSum = mysqli_query($dbconnect,
+													"SELECT SUM(r_score) as 'sum' 
+													FROM `RATING` WHERE `rss_id`={$rssRow['rss_id']}");
+							if($getSum){
+								while($sumRow = mysqli_fetch_array($getSum)){
+									$sum = $sumRow['sum'];
+
+									$rating = ($sum / $count);
+
+									if ($rating > 4.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
+									} else if ($rating > 4.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+									} else if ($rating > 3.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
+									} else if ($rating > 3.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+									} else if ($rating > 2.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
+									} else if ($rating > 2.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+									} else if ($rating > 1.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
+									} else if ($rating > 1.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+									} else if ($rating > 0.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
+									} else if ($rating > 0.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+									} else {
+										$response.=  "<span style='starrating'>Nil Rating!</span>";
+									}
+								} 	
+							} else {
+
+							}
+						} else {
+
+						}
+					}	
+					$response .= "</h2>";
+				
 					//if the flag is set, we are subscribed so do unsubscribe link
 					//otherwise do subscribe link
 					if($matchFlag) {
@@ -478,10 +679,77 @@ if($action=='select') {
 
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
-					$response .= "<div style='float:right; width:200px;>'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
+					$response .= "<div style='float:right;' class='thumb-container-t'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
 					$response .= "<h2 style='float:left; margin-right:50px;' ><img style='padding-top:10px;' src='images/trend.png' width='65px'> " . $count . "</h2>";
-					$response .= "<h2 style='margin:0px;'><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></h2>";
+					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
+					//Get rating - added by RS 14/04/2017
+					//Test if feed is rated
+					//get count of rating entires
+					$isRated = mysqli_query($dbconnect,
+											"SELECT rating_id
+											FROM `RATING`
+											WHERE `rss_id`={$rssRow['rss_id']}");
+
+					if(mysqli_num_rows($isRated)==0){
+
+					} else {
+
+						//get count of rating entires
+						$getCount = mysqli_query($dbconnect,
+												"SELECT COUNT(rating_id) as 'count'
+												FROM `RATING`
+												WHERE `rss_id`={$rssRow['rss_id']}");	
+
+						if($getCount) {
+
+							while($countRow = mysqli_fetch_array($getCount)){
+								$count = $countRow['count'];
+							}
+
+							//get count of rating entires
+							$getSum = mysqli_query($dbconnect,
+													"SELECT SUM(r_score) as 'sum' 
+													FROM `RATING` WHERE `rss_id`={$rssRow['rss_id']}");
+							if($getSum){
+								while($sumRow = mysqli_fetch_array($getSum)){
+									$sum = $sumRow['sum'];
+
+									$rating = ($sum / $count);
+
+									if ($rating > 4.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/5stars.png'>";
+									} else if ($rating > 4.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/4.5stars.png'>";
+									} else if ($rating > 3.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/4stars.png'>";
+									} else if ($rating > 3.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/3.5stars.png'>";
+									} else if ($rating > 2.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/3stars.png'>";
+									} else if ($rating > 2.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/2.5stars.png'>";
+									} else if ($rating > 1.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/2stars.png'>";
+									} else if ($rating > 1.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/1.5stars.png'>";
+									} else if ($rating > 0.75){
+										$response.=  "<img height='25px;' class='starrating' src='images/1stars.png'>";
+									} else if ($rating > 0.25){
+										$response.=  "<img height='25px;' class='starrating' src='images/0.5stars.png'>";
+									} else {
+										$response.=  "<span style='starrating'>Nil Rating!</span>";
+									}
+								} 	
+							} else {
+
+							}
+						} else {
+
+						}
+					}	
+					$response .= "</h2>";
+			
 				//if the flag is set, we are subscribed so do unsubscribe link
 				//otherwise do subscribe link
 				if($matchFlag) {
