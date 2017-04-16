@@ -18,7 +18,7 @@
 						</li>
 						<li><a href="most_subbed_feeds.php">Most subscribed feeds</a>
 						</li>
-						<li><a href="Most_commented_feeds.php">Most commented feeds</a>
+						<li><a href="most_commented_feeds.php">Most commented feeds</a>
 						</li>
 					</ul>
 				</li>
