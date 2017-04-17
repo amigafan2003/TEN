@@ -55,7 +55,7 @@
 /* TEN specific                                                                  */
 /*********************************************************************************/
 
-.icon	{
+.feedicon	{
 	margin-right:50px;
 }
 
@@ -1211,7 +1211,7 @@ div.taped-image img{
 			width:100%;
 		}
 		
-		.icon	{
+		.feedicon	{
 			margin-right:20px;
 		}
 		
@@ -1444,7 +1444,7 @@ div.taped-image img{
 
 	@media screen and (max-width: 480px) {
 
-		.icon	{
+		.feedicon	{
 			margin-right:20px;
 		}
 		
