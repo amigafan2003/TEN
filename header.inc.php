@@ -1,3 +1,6 @@
+<div id="titlebar">
+	<a style="border-bottom: 0;" href="index.php"><img src="images/textlogo.png" width="100%" alt=""/></a>
+</div>
 <header id="header">
 	<a href="index.php" class="logo"><strong>TEN  </strong><?php echo $pageTitle ?></a>
 	<ul class="icons">
