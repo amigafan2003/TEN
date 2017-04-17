@@ -100,7 +100,7 @@ if($action=='select') {
 
 				//Call function to extract feed thumb from RSS feed - RS 21/03/2017
 				$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-				$response .= "<h2 style='display:inline; float:left;' class='icon' ><img style='padding-top:10px; display:inline;' src='images/comment.png' width='25px'> " . $count . "</h2>";
+				$response .= "<h2 style='display:inline; float:left;' class='feedicon' ><img style='padding-top:10px; display:inline;' src='images/comment.png' width='25px'> " . $count . "</h2>";
 				$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a>";
 			
 				//Get rating - added by RS 14/04/2017

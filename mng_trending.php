@@ -105,7 +105,7 @@ if($action=='select') {
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
 					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
+					$response .= "<h2 style='float:left;' class='feedicon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -251,7 +251,7 @@ if($action=='select') {
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
 					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
+					$response .= "<h2 style='float:left;' class='feedicon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -396,7 +396,7 @@ if($action=='select') {
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
 					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
+					$response .= "<h2 style='float:left;' class='feedicon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -541,7 +541,7 @@ if($action=='select') {
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
 					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
+					$response .= "<h2 style='float:left;' class='feedicon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
 					//Get rating - added by RS 14/04/2017
@@ -680,7 +680,7 @@ if($action=='select') {
 					//generate link and title for RSS Feed
 					//Call function to extract feed thumb from RSS feed - RS 21/03/2017
 					$response .= "<div style='float:right;' class='thumb-container'><img class='feedThumb' src='" . getThumb($rssRow['address']) . "'></div>";
-					$response .= "<h2 style='float:left;' class='icon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
+					$response .= "<h2 style='float:left;' class='feedicon' ><img src='images/trend.png' height='50px'> " . $count . "</h2>";
 					$response .= "<h2><a href='#' class='rsslink' rssid='" . $rssRow['rss_id'] . "' >" . $rssRow['title'] . "</a></a>";
 
 					//Get rating - added by RS 14/04/2017
