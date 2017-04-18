@@ -41,6 +41,21 @@
 				?>
 				<li><a href="index.php?#contact">Contact Us</a>
 				</li>
+				<?php
+					$user_id = $_SESSION['user_id'];
+					$userResult = mysqli_query( $dbconnect,
+						"SELECT `u_img_thumb` FROM `USER` WHERE user_id = $user_id" );
+
+					while ( $row = mysqli_fetch_array( $userResult ) ) {
+						$avatar = $row ['u_img_thumb'];
+					} 
+				?>
+				<li><?php 
+					if ($avatar == "") { 
+					} else {?>
+						<div style="display: inline-block;"><img style="vertical-align: middle;" src="<?php echo $avatar ?>" width="10%" alt=""/><?php } 
+					?><a style="padding-right:10px; float:left; vertical-align: middle;" href="myprofile.php">My Profile</a></div>
+				</li>
 				<li><a href="logout.php">Logout</a>
 				</li>
 			<?php 

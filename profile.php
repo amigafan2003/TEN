@@ -48,13 +48,9 @@ $pageTitle = "|  Profile";
 								$userRow = mysqli_fetch_assoc( $userResult );
 								?>
 									<!-- Profile image retrieved from $useRow within the database column of u_img_main.-->
-									<img src="<?php echo $userRow['u_img_main']; ?>">
+									<img width="50%" style="max-width:236px; min-wdith:150px" src="<?php echo $userRow['u_img_main']; ?>">
 								<?php
-									echo '<p>Username:<br>' . $userRow[ 'u_username' ] . '</p>';
-									echo '<p>First Name:<br>'.$userRow['u_firstname']. '</p>';
-									echo '<p>Surname:<br>' .$userRow['u_lastname']. '</p>';
-									echo '<p>Email:<br>' .$userRow['u_emailaddress']. '</p>';
-									echo '<p>Date of Birth:<br>' .$userRow['u_dob']. '</p>';
+									echo '<h3>Username:</h3><br><h2>' . $userRow[ 'u_username' ] . '</h2>';
 								?>
 							</div>
 							<div style="margin-right:50px; float:right; display:inline-block;">
