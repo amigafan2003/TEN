@@ -55,6 +55,11 @@
 /* TEN specific                                                                  */
 /*********************************************************************************/
 
+#titlebar {
+	margin-top: 30px;
+	max-width: 1200px;
+}
+
 .feedicon	{
 	margin-right:50px;
 }
@@ -114,6 +119,7 @@
 
 #commentscontainer {
 	display:none;
+	margin-bottom: 50px;
 }
 
 span.title{
@@ -540,6 +546,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 1680px) {
 		
+		#titlebar {
+			margin-top: 16px;
+		}
+		
 		.content-image-full img {
 			width:40%;
 		}
@@ -759,6 +769,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 1280px) {
 
+		#titlebar {
+			margin-top: 13px;
+		}		
+		
 		.content-image-full img {
 			width:47%;
 		}
@@ -1206,6 +1220,10 @@ div.taped-image img{
 	}
 
 	@media screen and (max-width: 736px) {
+		
+		#titlebar {
+			display:none;
+		}
 		
 		#loading {
 			width:100%;
@@ -4175,12 +4193,10 @@ div.taped-image img{
 			-ms-flex-shrink: 0;
 			flex-shrink: 0;
 			display: block;
-			margin: 0 0 2em 4em;
 			width: 50%;
 		}
 
 			#banner .image img {
-				height: 100%;
 				-moz-object-fit: cover;
 				-webkit-object-fit: cover;
 				-ms-object-fit: cover;
@@ -4195,6 +4211,12 @@ div.taped-image img{
 
 		@media screen and (orientation: portrait) {
 
+			#banner .image img {
+				margin-left: auto;
+				margin-right: auto;
+				float: none;
+			}
+			
 			#banner {
 				-moz-flex-direction: column-reverse;
 				-webkit-flex-direction: column-reverse;
@@ -4227,8 +4249,6 @@ div.taped-image img{
 					-webkit-flex-shrink: 0;
 					-ms-flex-shrink: 0;
 					flex-shrink: 0;
-					margin: 0 0 4em 0;
-					height: 25em;
 					max-height: 50vh;
 					min-height: 18em;
 					width: 100%;
@@ -4239,9 +4259,17 @@ div.taped-image img{
 		@media screen and (orientation: portrait) and (max-width: 480px) {
 
 			#banner .image {
-				max-height: 35vh;
+				min-height: 0em;
+				margin-bottom: 20px;
 			}
 
+		}
+
+		@media screen and (orientation: portrait) and (max-width: 980px) {
+			
+			#banner .image img {
+				width: 40%;
+			}
 		}
 
 /* Footer */

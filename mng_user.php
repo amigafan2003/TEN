@@ -176,7 +176,7 @@ if(!$valid) { //if not valid
 				<div class="clear"></div>
 				<input type="hidden" name="mode" value="login" />
 			  </div>
-			  <p style="color:red">User and password do not match.  Please re-enter details.<?php var_dump($hash); ?></p>
+			  <p style="color:red">User and password do not match.  Please re-enter details.</p>
 			</fieldset>
 			<?php	
 		}

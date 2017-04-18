@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="assets/css/main.css"/>
 	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+	<script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="assets/js/functions.js"></script>
@@ -128,20 +128,21 @@
 						<header>
 							<h1>Hi, I’m TEN<br />
 											</h1>
-							<p>What shall we say about ourselves?</p>
+							<p>I'm here to service all your RSS feed aggregation requirements.</p>
 						</header>
-						<p>What do we do? Why do we exist? Who do we think is going to use us?</p>
+						<p>You'll need to login to your account use my services, so why not do that right away or register for an account if you don't already have one?</p>
 						<ul class="actions">
-							<li><a href="#about" class="button big">Learn More</a>
+							<li><a href="login.php" class="button big">Login or register</a>
 							</li>
 						</ul>
-					</div>
+					</div>				
+					<br><br>
 					<span class="image object">
 										<img src="images/TEN.png" alt="" />
 									</span>
-				
-				</section>
-				<br /><br /><br /><br /><br />
+
+				</section>				
+				<br><br>
 				<!-- Section -->
 				<section id="about">
 					<header class="major">
@@ -151,37 +152,35 @@
 						<article>
 							<span class="icon fa-diamond"></span>
 							<div class="content">
-								<h3>Portitor ullamcorper</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+								<h3>Browse our RSS feeds</h3>
+								<p>We've collected all the best RSS feeds out there, so take a look, decide what feeds interest you and then subscribe to them, where they will then show in your My Subscriptiuons page.</p>
 							</div>
 						</article>
 						<article>
 							<span class="icon fa-paper-plane"></span>
 							<div class="content">
-								<h3>Sapien veroeros</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+								<h3>Comment and rate</h3>
+								<p>Comment on our feeds, highlight intersting articles to other users or rate our feeds so others can see what might interest them.  Share the knowledge!</p>
 							</div>
 						</article>
 						<article>
 							<span class="icon fa-rocket"></span>
 							<div class="content">
-								<h3>Quam lorem ipsum</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+								<h3>Power to you</h3>
+								<p>You can filter feeds by category or rating, only showing the feeds you might be interested in, then you can subscribe to those feeds for your own persistent personalised view.</p>
 							</div>
 						</article>
 						<article>
 							<span class="icon fa-signal"></span>
 							<div class="content">
-								<h3>Sed magna finibus</h3>
-								<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+								<h3>See what's trending</h3>
+								<p>See the feeds that are trending today or were trending yesterday, last week or last month.  See the feeds with the most comments or the most subscribers.</p>
 							</div>
 						</article>
 					</div>
-					<br />
-					<a href="#contact" class="button big">Contact Us</a>
 				</section>
-				<br /><br /><br /><br /><br />
-				<!-- Section -->
+				<br><br>
+					<!-- Section -->
 				<section id="contact">
 					<header class="major">
 						<h2>Contact</h2>
@@ -230,6 +229,7 @@
 							 Bispham Campus, Ashfield Rd, Blackpool FY2 0HB</p>
 						</div>
 					</div>
+					<br><br><br><br>
 				</section>
 
 			</div>
