@@ -54,7 +54,7 @@ if($action=="select") {
 			
 			//Get username - added by RS  12/04/2017
 			$usernameResult = mysqli_query($dbconnect,
-							"SELECT u_username
+							"SELECT u_username, u_img_main
 							FROM `USER`
 							WHERE `user_id`={$row['user_id']}");
 			
@@ -62,7 +62,7 @@ if($action=="select") {
 
 			$response.= $row['content'];
 			$response.= "</div>";
-			$response.= "<br><div><a href='profile.php?username=" . $usernameRow['u_username'] .  "'>" . $usernameRow['u_username'] . "</a></div>";
+			$response.= "<br><div><img style='vertical-align: middle;' src='" . $usernameRow['u_img_main'] . "' width='10%' alt=''/><a href='profile.php?username=" . $usernameRow['u_username'] .  "'>" . $usernameRow['u_username'] . "</a></div>";
 			//display date / time
 			$response.=  "<div class='comdate'>";
 			$response.=  $row['date_posted'];

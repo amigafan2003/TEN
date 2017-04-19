@@ -1,5 +1,5 @@
 <?php session_start(); //call or creates session??> <?php include( 'dbconnect.inc.php' );
-$pageTitle = "|  Profile";
+$pageTitle = "|  My Profile";
 
 ?>
 <!DOCTYPE HTML>
@@ -18,6 +18,16 @@ $pageTitle = "|  Profile";
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script>
+		function confirmChoice( userId ) {
+			response = confirm( "Are you sure you want to delete your account?" );
+			if ( response == 1 ) {
+				window.location = "mng_user.php?action=delete";
+			} else {
+				return false
+			}
+		}
+	</script>
 
 </head>
 
@@ -40,34 +50,28 @@ $pageTitle = "|  Profile";
 							<?php
 							if ( isset( $_SESSION[ "user_id" ] ) ) {
 									?>
-							<div style="margin-left:50px; float:left; display:inline-block;">
+							<div>
 								<?php
-								$username = $_GET['username'];
+								$user_id = $_SESSION['user_id'];
 								$userResult = mysqli_query( $dbconnect,
-									"SELECT * FROM `USER` WHERE u_username = '$username'" );
-								$userRow = mysqli_fetch_assoc( $userResult );
+									"SELECT * FROM `USER` WHERE user_id = $user_id" );
+								while ( $userRow = mysqli_fetch_array( $userResult ) ) {
 								?>
 									<!-- Profile image retrieved from $useRow within the database column of u_img_main.-->
 									<img width="50%" style="max-width:236px; min-wdith:150px" src="<?php echo $userRow['u_img_main']; ?>">
 								<?php
-									echo '<h3>Username:</h3><br><h2>' . $userRow[ 'u_username' ] . '</h2>';
-								?>
-							</div>
-							<div style="margin-right:50px; float:right; display:inline-block;">
-								<h3>Comments by this user:</h3>
-								<?php
-								$userComResult = mysqli_query( $dbconnect,
-									"SELECT * FROM `COMMENT` WHERE user_id = {$userRow['user_id']}" );
-								while ($userComments = mysqli_fetch_array( $userComResult )) {
-									//Get RSS feed title
-									$rssResult = mysqli_query( $dbconnect,
-										"SELECT * FROM `RSS` WHERE rss_id = {$userComments['rss_id']}" );
-									while ($rssRow = mysqli_fetch_array( $rssResult )) {
-										echo '<p>On feed <a href=comments.php?rssid="' . $rssRow['rss_id'] . '">' . $rssRow['title'] . '</a></p>';
-									}									
-									echo '<p>' . $userComments['content'] . '</p>';	
-									echo '<p>' . $userComments['date_posted'] . '</p><br>';
-									
+									echo '<p>Username:<br>' . $userRow[ 'u_username' ] . '</p>';
+									echo '<p>User level:<br>' . $userRow[ 'u_level' ] . '</p>';
+									echo '<p>First Name:<br>'.$userRow['u_firstname']. '</p>';
+									echo '<p>Surname:<br>' .$userRow['u_lastname']. '</p>';
+									echo '<p>Email:<br>' .$userRow['u_emailaddress']. '</p>';
+									echo '<p>Date of Birth:<br>' .$userRow['u_dob']. '</p>';
+
+									echo '<div style="min-width:240px">';
+									echo '<a style="display:inline-block;" class="btn btn-success" href="userupdate.php">Update</a>';
+									echo ' ';
+									echo '<a style="display:inline-block;" class="btn btn-danger" href="javascript:confirmChoice(' .$user_id . ')">Delete</a>';
+									echo '</div>';
 								}
 								?>
 							</div>

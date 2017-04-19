@@ -44,19 +44,7 @@ if(!$valid) { //if not valid
 		//hashed password
 		
 		$password = password_hash($_POST['r_pword1'],PASSWORD_DEFAULT);
-		$sal = $_POST['r_sal'];
-		$fname = mysqli_escape_string($dbconnect,
-			$_POST['r_fname']);
-		$sname = mysqli_escape_string($dbconnect,
-			$_POST['r_sname']);
-		$dob = $_POST['r_dob'];
-		$email = mysqli_escape_string($dbconnect,
-			$_POST['r_email']);	
-		if (isset($checkbox)) {
-			$emailSub = "Y";
-		} else {
-		} $emailSub = "N";
-		
+			
 		//try insertion
 		$registeruser = @mysqli_query($dbconnect,
 			"INSERT INTO `USER`
@@ -187,25 +175,152 @@ if(!$valid) { //if not valid
 
 //Update user profile routine
 if ( $_POST[ 'action' ] == "update" ) { 
+	$avatarMSG = "";
 	//sanitise data for entry
 	$user_id = $_SESSION[ 'user_id' ];
 	$username = mysqli_escape_string( $dbconnect,
 		$_POST[ 'username' ] );
-	//update query
+	$firstname = mysqli_escape_string( $dbconnect,
+		$_POST[ 'firstname' ] );
+	$lastname = mysqli_escape_string( $dbconnect,
+		$_POST[ 'lastname' ] );
+	$emailaddress = mysqli_escape_string( $dbconnect,
+		$_POST[ 'emailaddress' ] );
+	$dob = mysqli_escape_string( $dbconnect,
+		$_POST[ 'dob' ] );
+	
+	//Avatar code
+	define("MAX_SIZE",20971520);
+	$errors=0;
+	
+	//filenames
+	$main = $_FILES['avatar']['name'];
+	$thumb = $_FILES['avatar']['name'];
+	//temp files
+	$upMain = $_FILES['avatar']['tmp_name'];
+	$upThumb = $_FILES['avatar']['tmp_name'];
+	
+	//check file extensions
+	$mainFile = stripslashes($main);
+	$mainExt = strtolower(getExtension($mainFile));
+	
+	$thumbFile = stripslashes($thumb);
+	$thumbExt = strtolower(getExtension($thumbFile));
+	
+	if(!validExtension($mainExt) || !validExtension($thumbExt)) {
+		if(empty($main)) {
+			$errors=1; 
+		} else {
+			$avatarMSG = "<span style='color: red;'>However there was a problem with the avatar image - Unknown image extension</span>";
+			$errors=1; 
+		}
+	} else {
+		//filesizes
+		$mainSize = filesize($upMain);
+		$thumbSize = filesize($upThumb);
+		
+		if($mainSize>MAX_SIZE || $thumbSize>MAX_SIZE) {
+			if(empty($main)) {
+				$errors=1;
+			} else {
+				$avatarMSG['message'] = "<span style='color: red;'>However there was a problem with the avatar image - too big!!</span>";
+				$errors=1;
+			}
+		} else {
+			//file type checks for memory images
+			switch($mainExt){
+				case "jpg" : $mainSrc = imagecreatefromjpeg($upMain); break;
+				case "jpeg" : $mainSrc = imagecreatefromjpeg($upMain); break;
+				case "png" : $mainSrc = imagecreatefrompng($upMain); break;
+				case "gif" : $mainSrc = imagecreatefromgif($upMain); break;
+			}
+			switch($thumbExt){
+				case "jpg" : $thumbSrc = imagecreatefromjpeg($upThumb); break;
+				case "jpeg" : $thumbSrc = imagecreatefromjpeg($upThumb); break;
+				case "png" : $thumbSrc = imagecreatefrompng($upThumb); break;
+				case "gif" : $thumbSrc = imagecreatefromgif($upThumb); break;
+			}
+			//get uploaded width and height
+			list($mainWidth, $mainHeight) = getimagesize($upMain);
+			list($thumbWidth, $thumbHeight) = getimagesize($upThumb);
+			//main width
+			$mainNewWidth = 900; 
+			$mainNewHeight = ($mainHeight/$mainWidth)*$mainNewWidth;
+			$tmpMain = imagecreatetruecolor($mainNewWidth,$mainNewHeight);
+			$thumbNewWidth = 400; 
+			$thumbNewHeight = ($thumbHeight/$thumbWidth)*$thumbNewWidth;
+			$tmpThumb = imagecreatetruecolor($thumbNewWidth,$thumbNewHeight);
+			
+			//resave images
+			imagecopyresampled($tmpMain,$mainSrc,0,0,0,0,$mainNewWidth,$mainNewHeight,$mainWidth,$mainHeight);
+			imagecopyresampled($tmpThumb,$thumbSrc,0,0,0,0,$thumbNewWidth,$thumbNewHeight,$thumbWidth,$thumbHeight);
+			
+			//create and save images
+			switch($mainExt) {
+				case "jpg" : imagejpeg($tmpMain,"images/avatars/main/" . $main,100);
+				break;
+				case "jpeg" : imagejpeg($tmpMain,"images/avatars/main/" . $main,100);
+				break;
+				case "png" : imagepng($tmpMain,"images/avatars/main/" . $main,0);
+				break;
+				case "gif" : imagegif($tmpMain,"images/avatars/main/" . $main);
+				break;
+			}
+			switch($thumbExt) {
+				case "jpg" : imagejpeg($tmpThumb,"images/avatars/thumb/" . $thumb,100);
+				break;
+				case "jpeg" : imagejpeg($tmpThumb,"images/avatars/thumb/" . $thumb,100);
+				break;
+				case "png" : imagepng($tmpThumb,"images/avatars/thumb/" . $thumb,0);
+				break;
+				case "gif" : imagegif($tmpThumb,"images/avatars/thumb/" . $thumb);
+				break;
+			}
+			
+			//free up memory
+			imagedestroy($mainSrc); imagedestroy($tmpMain);
+			imagedestroy($thumbSrc); imagedestroy($tmpThumb);
+			
+		}//end file size check
+		
+	}//end extension check	
 
-	$updateSql = "UPDATE `USER`
-		SET `user_id`='{$user_id}',
-		`u_username`='{$username}'";
+		
+	if (!$errors){
+		$main = "images/avatars/main/" . $main;
+		$thumb = "images/avatars/thumbs/" . $thumb;
+		
+		//update query
+		$updateSql = "UPDATE `USER`
+			SET `u_username`='{$username}',
+			`u_firstname`='{$firstname}',
+			`u_lastname`='{$lastname}',
+			`u_emailaddress`='{$emailaddress}',
+			`u_dob`='{$dob}',
+			`u_img_main`='{$main}',
+			`u_img_thumb`='{$thumb}'";
+	} else {
+		
+		//update query
+		$updateSql = "UPDATE `USER`
+			SET `u_username`='{$username}',
+			`u_firstname`='{$firstname}',
+			`u_lastname`='{$lastname}',
+			`u_emailaddress`='{$emailaddress}',
+			`u_dob`='{$dob}'";
+	}
+	
+	//update query
 
 	$updateSql .= " WHERE `user_id`={$user_id}";
 	$updateResult = mysqli_query( $dbconnect, $updateSql );
 
 	if ( $updateResult ) {
 		//header("location: detail.php?id=" . $_POST['p_id'])
-		$_SESSION[ 'message' ] = "Your profile has been updated.";
+		$_SESSION[ 'message' ] = "Your profile has been updated.<br><br>" . $avatarMSG;
 		header( "location: userupdate.php");
 	} else {
-		$_SESSION[ 'message' ] = "Your profile could not be updated.";
+		$_SESSION[ 'message' ] = "Your profile could not be updated<br><br>.";
 		header( "location: userupdate.php");
 	}
 
@@ -229,3 +344,28 @@ if ( $_GET[ 'action' ] == "delete" ) { //end insert
 	header( "location: userupdate.php" );
 
 } // end routine
+
+//Code for checking if valid image extension for avatar
+	function defaulty($x){
+		return strlen($x) ? $x : '<i>Blank</i>';
+	}
+	function validExtension($ext){
+		if($ext == "jpg"  || $ext == "jpeg" || 
+			$ext == "png" || $ext == "gif") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function getExtension($str){
+		//check for dot in string
+		$i = strrpos($str,".");
+		//if no dot return nothing
+		if (!$i) {return "";}
+		//what's the extension based on length if string
+		$l = strlen($str) - $i;
+		//get extension using substring	
+		$ext = substr($str,$i+1,$l);
+		return $ext;
+	}
