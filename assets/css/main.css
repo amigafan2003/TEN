@@ -55,6 +55,10 @@
 /* TEN specific                                                                  */
 /*********************************************************************************/
 
+.skiptoarticles {
+	display:none;
+}
+
 #titlebar {
 	margin-top: 30px;
 	max-width: 1200px;
@@ -1002,6 +1006,10 @@ div.taped-image img{
 
 	@media screen and (max-width: 980px) {
 
+		.skiptoarticles {
+			display:block;
+		}		
+		
 		.content-image-full img {
 			width:54%;
 		}		
