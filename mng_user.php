@@ -288,7 +288,7 @@ if ( $_POST[ 'action' ] == "update" ) {
 		
 	if (!$errors){
 		$main = "images/avatars/main/" . $main;
-		$thumb = "images/avatars/thumbs/" . $thumb;
+		$thumb = "images/avatars/thumb/" . $thumb;
 		
 		//update query
 		$updateSql = "UPDATE `USER`
