@@ -153,14 +153,14 @@
 							<span class="icon fa-diamond"></span>
 							<div class="content">
 								<h3>Browse our RSS feeds</h3>
-								<p>We've collected all the best RSS feeds out there, so take a look, decide what feeds interest you and then subscribe to them, where they will then show in your My Subscriptiuons page.</p>
+								<p>We've collected all the best RSS feeds out there, so take a look, decide what feeds interest you and then subscribe to them, where they will then show in your My Subscriptions page.</p>
 							</div>
 						</article>
 						<article>
 							<span class="icon fa-paper-plane"></span>
 							<div class="content">
 								<h3>Comment and rate</h3>
-								<p>Comment on our feeds, highlight intersting articles to other users or rate our feeds so others can see what might interest them.  Share the knowledge!</p>
+								<p>Comment on our feeds, highlight interesting articles to other users or rate our feeds so others can see what might interest them.  Share the knowledge!</p>
 							</div>
 						</article>
 						<article>
